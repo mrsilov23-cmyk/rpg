@@ -42,7 +42,6 @@ const CLASSES = {
 
 // ============ ПРЕДМЕТЫ ============
 const ITEMS = {
-  // Оружие
   iron_sword:    { name: "Железный меч", type: "weapon", atk: 6,  desc: "Простой, но надёжный." },
   wooden_staff:  { name: "Деревянный посох", type: "weapon", atk: 5, desc: "Проводит ману." },
   dagger:        { name: "Кинжал", type: "weapon", atk: 4, crit: 15, desc: "Быстрый удар." },
@@ -51,20 +50,17 @@ const ITEMS = {
   magic_wand:    { name: "Магический жезл", type: "weapon", atk: 12, desc: "Светится изнутри." },
   shadow_blade:  { name: "Теневой клинок", type: "weapon", atk: 15, crit: 20, desc: "Режет саму тьму." },
 
-  // Броня
   cloth_robe:    { name: "Мантия", type: "armor", def: 3, desc: "Лёгкая ткань." },
   leather_armor: { name: "Кожаная броня", type: "armor", def: 5, desc: "Гибкая защита." },
   chainmail:     { name: "Кольчуга", type: "armor", def: 8, desc: "Металлические кольца." },
   plate_armor:   { name: "Латная броня", type: "armor", def: 12, desc: "Тяжёлая, но крепкая." },
   dragon_scale:  { name: "Драконья чешуя", type: "armor", def: 18, desc: "Легендарная защита." },
 
-  // Расходники
   bread:            { name: "Хлеб", type: "potion", heal: 15, desc: "Восстанавливает 15 HP." },
   healing_potion:   { name: "Лечебное зелье", type: "potion", heal: 40, desc: "Восстанавливает 40 HP." },
   mana_potion:      { name: "Зелье маны", type: "potion", heal: 25, desc: "Восстанавливает 25 HP." },
   elixir:           { name: "Эликсир жизни", type: "potion", heal: 100, desc: "Полное восстановление." },
 
-  // Особые
   lockpick:    { name: "Отмычка", type: "tool", desc: "Помогает взламывать замки." },
   torch:       { name: "Факел", type: "tool", desc: "Освещает путь." },
   gold_ring:   { name: "Золотое кольцо", type: "tool", desc: "Можно продать." }
@@ -112,7 +108,6 @@ let currentClass = null;
 let itemUID = 0;
 let playerRef = null;
 
-// ============ UI ЭЛЕМЕНТЫ ============
 const $ = id => document.getElementById(id);
 const logEl = $("log");
 
@@ -378,7 +373,7 @@ function addLog(text, cls = "result") {
   logEl.scrollTop = logEl.scrollHeight;
 }
 
-// ============ СИСТЕМА ДЕЙСТВИЙ ============
+// ============ ДЕЙСТВИЯ ============
 $("actionBtn").onclick = performAction;
 $("actionInput").addEventListener("keydown", e => {
   if (e.key === "Enter") performAction();
@@ -399,31 +394,22 @@ function performAction() {
   renderInventory();
 }
 
-// ============ "НЕЙРОНКА" — ЭВРИСТИЧЕСКИЙ ДВИЖОК ============
+// ============ ДВИЖОК ДЕЙСТВИЙ ============
 function resolveAction(input) {
   const t = input.toLowerCase();
 
-  // === АТАКА ===
   if (matchesAny(t, ["атак", "удар", "бью", "бей", "руб", "кол", "стрел", "кидаю", "сража", "fight", "attack", "hit"])) {
     return doAttack();
   }
-
-  // === ЛЕЧЕНИЕ ===
   if (matchesAny(t, ["леч", "лечусь", "исцел", "heal", "восстанов"])) {
     return doHeal();
   }
-
-  // === ЗАЩИТА ===
   if (matchesAny(t, ["защищ", "блок", "прикры", "defend", "block", "уворач", "dodge"])) {
     return doDefend();
   }
-
-  // === ОСМОТРЕТЬ ===
   if (matchesAny(t, ["осмотр", "смотр", "исслед", "искать", "обыск", "look", "search", "examine"])) {
     return doSearch();
   }
-
-  // === ИНВЕНТАРЬ ===
   if (matchesAny(t, ["инвентар", "рюкзак", "сумк", "inventory", "проверяю вещи"])) {
     addLog("🎒 Ты осматриваешь инвентарь:", "result");
     state.inventory.forEach(e => {
@@ -432,35 +418,24 @@ function resolveAction(input) {
     });
     return;
   }
-
-  // === КВЕСТЫ ===
   if (matchesAny(t, ["квест", "задани", "quest", "миссия"])) {
     addLog("📜 Активные квесты:", "result");
     state.activeQuests.forEach(q => addLog(`• ${q.title}: ${q.desc}`, "online"));
     return;
   }
-
-  // === ТОРГОВЛЯ ===
   if (matchesAny(t, ["прода", "торг", "купить", "магазин", "sell", "trade", "buy"])) {
     return doTrade();
   }
-
-  // === ОТДЫХ ===
   if (matchesAny(t, ["отдых", "спать", "отдохн", "rest", "sleep"])) {
     return doRest();
   }
-
-  // === ИДТИ / ИСКАТЬ ПРИКЛЮЧЕНИЙ ===
   if (matchesAny(t, ["напада", "выхожу", "иду", "войти", "входи", "enter", "go"])) {
     return spawnEnemy();
   }
-
-  // === ПОБЕГ ===
   if (matchesAny(t, ["бегу", "убега", "отступ", "flee", "run away"])) {
     return doFlee();
   }
 
-  // === НЕИЗВЕСТНО ===
   const randoms = [
     "Ты пытаешься сделать это, но ничего не происходит...",
     "Мир не отвечает на такое действие. Попробуй что-то другое.",
@@ -471,10 +446,7 @@ function resolveAction(input) {
   if (Math.random() < 0.2) doRandomEvent();
 }
 
-function matchesAny(text, list) {
-  return list.some(k => text.includes(k));
-}
-
+function matchesAny(text, list) { return list.some(k => text.includes(k)); }
 function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
 // ============ БОЙ ============
@@ -505,7 +477,6 @@ function doAttack() {
     if (Math.random() < 0.5) spawnEnemy();
     return;
   }
-
   const enemy = state.currentEnemy;
   let dmg = Math.max(1, state.atk - enemy.def + randInt(-2, 4));
   let crit = false;
@@ -518,11 +489,7 @@ function doAttack() {
   }
   enemy.hp -= dmg;
   addLog(`🗡️ Ты наносишь ${dmg} урона${crit ? " <b>(КРИТ!)</b>" : ""} ${enemy.name}.`, "result");
-
-  if (enemy.hp <= 0) {
-    return killEnemy();
-  }
-
+  if (enemy.hp <= 0) return killEnemy();
   enemyTurn();
 }
 
@@ -536,11 +503,7 @@ function enemyTurn() {
     state.hp -= dmg;
     addLog(`💥 ${enemy.name} атакует тебя и наносит ${dmg} урона!`, "system");
   }
-
-  if (state.hp <= 0) {
-    state.hp = 0;
-    return playerDeath();
-  }
+  if (state.hp <= 0) { state.hp = 0; return playerDeath(); }
   updateHUD();
 }
 
@@ -558,9 +521,7 @@ function killEnemy() {
     addItem(lootKey);
     addLog(`🎁 Выпало: ${ITEMS[lootKey].name}`, "loot");
   }
-
   checkLevelUp();
-
   state.currentEnemy = null;
   updateHUD();
   renderInventory();
