@@ -1,0 +1,41 @@
+{
+  "backpack_v3": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      ".indexOn": [
+        "expiresAt"
+      ],
+      "$room": {
+        ".read": "auth != null && data.child('members').child(auth.uid).exists() && data.child('expiresAt').val() > now",
+        ".write": false
+      }
+    },
+    "presence": {
+      "$room": {
+        ".read": "auth != null && root.child('backpack_v3/rooms').child($room).child('members').child(auth.uid).exists()",
+        "$uid": {
+          ".write": "auth != null && auth.uid === $uid && (!newData.exists() || (root.child('backpack_v3/rooms').child($room).child('members').child(auth.uid).exists() && root.child('backpack_v3/rooms').child($room).child('expiresAt').val() > now))",
+          ".validate": "newData.hasChildren(['online', 'at'])",
+          "online": {
+            ".validate": "newData.isBoolean()"
+          },
+          "at": {
+            ".validate": "newData.isNumber() && newData.val() <= now + 10000 && newData.val() >= now - 60000"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    },
+    "limits": {
+      ".read": false,
+      ".write": false
+    },
+    "owned": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}
