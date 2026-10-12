@@ -8,7 +8,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#0a0a14;--bg2:#12121f;--panel:rgba(20,20,35,0.7);--panel2:rgba(28,28,48,0.6);
+  --bg:#0a0a14;--bg2:#12121f;--panel:rgba(20,20,35,0.7);
   --border:rgba(120,100,200,0.15);--border2:rgba(140,120,220,0.3);
   --text:#e8e4f5;--muted:#8a84a8;--dim:#4a4660;
   --gold:#ffc857;--gold2:#ffd87a;--purple:#a78bfa;--purple2:#c4b5fd;
@@ -17,10 +17,7 @@
   --r1:#9ca3af;--r2:#4ade80;--r3:#60a5fa;--r4:#a78bfa;--r5:#ffc857;
 }
 html,body{height:100%;overflow:hidden}
-body{
-  font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);
-  overflow:hidden;position:relative;font-size:14px;
-}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);overflow:hidden;position:relative;font-size:14px}
 body::before{
   content:'';position:fixed;inset:0;
   background:
@@ -38,12 +35,11 @@ body::after{
     radial-gradient(1px 1px at 40% 70%,rgba(255,255,255,0.35),transparent),
     radial-gradient(1px 1px at 70% 50%,rgba(255,255,255,0.25),transparent),
     radial-gradient(1px 1px at 10% 80%,rgba(255,255,255,0.3),transparent),
-    radial-gradient(1px 1px at 90% 90%,rgba(255,255,255,0.4),transparent),
-    radial-gradient(1px 1px at 55% 20%,rgba(255,255,255,0.3),transparent);
-  background-size:200px 200px,300px 300px,250px 250px,180px 180px,220px 220px,280px 280px,240px 240px;
+    radial-gradient(1px 1px at 90% 90%,rgba(255,255,255,0.4),transparent);
+  background-size:200px 200px,300px 300px,250px 250px,180px 180px,220px 220px,280px 280px;
   animation:drift 60s linear infinite;
 }
-@keyframes drift{to{background-position:200px 400px,-300px 600px,250px 500px,180px 360px,-220px 440px,280px 560px,240px 480px}}
+@keyframes drift{to{background-position:200px 400px,-300px 600px,250px 500px,180px 360px,-220px 440px,280px 560px}}
 ::-webkit-scrollbar{width:8px;height:8px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:rgba(167,139,250,0.2);border-radius:4px}
@@ -52,60 +48,38 @@ body::after{
 .screen{display:none;height:100vh;overflow-y:auto}
 .screen.active{display:block}
 
-/* ============ ЛОГИН ============ */
+/* ЛОГИН */
 #loginScreen{display:none;padding:40px 20px}
 #loginScreen.active{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:24px}
-
-.hero-logo{
-  text-align:center;margin-bottom:8px;
-}
+.hero-logo{text-align:center}
 .hero-logo h1{
   font-family:'Cinzel',serif;font-weight:900;font-size:clamp(36px,6vw,64px);
   background:linear-gradient(135deg,#fff 0%,var(--gold2) 30%,var(--purple2) 60%,#fff 100%);
-  background-size:200% 200%;
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  letter-spacing:2px;line-height:1;
-  animation:shine 6s ease infinite;
-  filter:drop-shadow(0 0 30px rgba(255,200,87,0.4));
+  background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  letter-spacing:2px;line-height:1;animation:shine 6s ease infinite;filter:drop-shadow(0 0 30px rgba(255,200,87,0.4));
 }
 @keyframes shine{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.hero-logo .sub{
-  color:var(--muted);font-size:14px;letter-spacing:4px;
-  text-transform:uppercase;margin-top:8px;font-weight:600;
-}
+.hero-logo .sub{color:var(--muted);font-size:14px;letter-spacing:4px;text-transform:uppercase;margin-top:8px;font-weight:600}
 
 .glass{
-  background:var(--panel);
-  backdrop-filter:blur(20px) saturate(150%);
-  -webkit-backdrop-filter:blur(20px) saturate(150%);
-  border:1px solid var(--border);
-  border-radius:20px;
-  box-shadow:
-    0 20px 60px rgba(0,0,0,0.5),
-    inset 0 1px 0 rgba(255,255,255,0.08),
-    0 0 0 1px rgba(167,139,250,0.05);
+  background:var(--panel);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);
+  border:1px solid var(--border);border-radius:20px;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5),inset 0 1px 0 rgba(255,255,255,0.08),0 0 0 1px rgba(167,139,250,0.05);
 }
-
-.login-panel{width:min(560px,95vw);padding:32px}
+.login-panel{width:min(620px,95vw);padding:32px}
 .login-panel label{display:block;color:var(--muted);font-size:11px;margin-bottom:8px;text-transform:uppercase;letter-spacing:2px;font-weight:700}
 .login-panel input{
-  width:100%;padding:14px 18px;background:rgba(10,10,20,0.8);
-  border:1px solid var(--border2);color:var(--text);border-radius:12px;
-  font-size:15px;font-weight:500;transition:all 0.2s;font-family:inherit;
+  width:100%;padding:14px 18px;background:rgba(10,10,20,0.8);border:1px solid var(--border2);
+  color:var(--text);border-radius:12px;font-size:15px;font-weight:500;transition:all 0.2s;font-family:inherit;
 }
-.login-panel input:focus{
-  outline:none;border-color:var(--purple);
-  box-shadow:0 0 0 4px rgba(167,139,250,0.15),0 0 30px rgba(167,139,250,0.2);
-}
+.login-panel input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 4px rgba(167,139,250,0.15),0 0 30px rgba(167,139,250,0.2)}
 .field{margin-bottom:20px}
 
-/* ВЫБОР ПЕРСОНАЖА */
 .char-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
 @media(max-width:600px){.char-grid{grid-template-columns:repeat(2,1fr)}}
 .char-card{
-  padding:16px 12px;background:rgba(15,15,28,0.8);
-  border:2px solid var(--border);border-radius:16px;cursor:pointer;
-  text-align:center;transition:all 0.25s;position:relative;overflow:hidden;
+  padding:16px 12px;background:rgba(15,15,28,0.8);border:2px solid var(--border);
+  border-radius:16px;cursor:pointer;text-align:center;transition:all 0.25s;position:relative;overflow:hidden;
 }
 .char-card::before{
   content:'';position:absolute;inset:0;
@@ -120,54 +94,30 @@ body::after{
   transform:translateY(-4px) scale(1.02);
 }
 .char-card.selected::before{opacity:0.35}
-.char-card img{
-  width:70px;height:70px;margin:0 auto 10px;display:block;border-radius:14px;
-  background:rgba(0,0,0,0.3);padding:4px;
-  border:1px solid rgba(255,255,255,0.1);
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5));
-}
+.char-card .portrait{width:70px;height:70px;margin:0 auto 10px;display:block;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.5))}
 .char-card h4{font-size:14px;font-weight:800;margin-bottom:4px;color:var(--acc,var(--text))}
 .char-card p{font-size:10px;color:var(--muted);line-height:1.4;min-height:28px}
 .char-card .stats-mini{display:flex;justify-content:center;gap:6px;margin-top:8px;font-size:10px;font-weight:700;color:var(--muted)}
 .char-card .stats-mini span{color:var(--text)}
 
-.btn{
-  padding:14px 24px;border-radius:12px;border:none;font-weight:800;
-  font-size:14px;cursor:pointer;transition:all 0.2s;font-family:inherit;
-  letter-spacing:0.5px;position:relative;overflow:hidden;
-}
-.btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.2) 50%,transparent 70%);
-  transform:translateX(-100%);transition:transform 0.6s;
-}
+.btn{padding:14px 24px;border-radius:12px;border:none;font-weight:800;font-size:14px;cursor:pointer;transition:all 0.2s;font-family:inherit;letter-spacing:0.5px;position:relative;overflow:hidden}
+.btn::before{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,0.2) 50%,transparent 70%);transform:translateX(-100%);transition:transform 0.6s}
 .btn:hover:not(:disabled)::before{transform:translateX(100%)}
 .btn:disabled{opacity:0.4;cursor:not-allowed}
-.btn-primary{
-  width:100%;background:linear-gradient(135deg,#8b5cf6,#c4b5fd);
-  color:#fff;box-shadow:0 10px 30px rgba(139,92,246,0.4),inset 0 1px 0 rgba(255,255,255,0.3);
-}
+.btn-primary{width:100%;background:linear-gradient(135deg,#8b5cf6,#c4b5fd);color:#fff;box-shadow:0 10px 30px rgba(139,92,246,0.4),inset 0 1px 0 rgba(255,255,255,0.3)}
 .btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 15px 40px rgba(139,92,246,0.5)}
 .btn-gold{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#1a1206;box-shadow:0 10px 30px rgba(245,158,11,0.3),inset 0 1px 0 rgba(255,255,255,0.3)}
 .btn-gold:hover:not(:disabled){transform:translateY(-2px)}
 .btn-ghost{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--muted)}
 .btn-ghost:hover{background:rgba(255,255,255,0.1);color:var(--text)}
-.btn-red{background:linear-gradient(135deg,#dc2626,#f87171);color:#fff}
 
-/* ============ ИГРА ============ */
+/* ИГРА */
 #gameScreen{padding:12px;height:100vh;display:none}
 #gameScreen.active{display:flex;flex-direction:column;gap:12px;max-width:1600px;margin:0 auto}
-
-.top-bar{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:12px 20px;flex-wrap:wrap;gap:12px;
-}
+.top-bar{display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:12px}
 .hud{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
 .hud-item{display:flex;align-items:center;gap:10px}
-.hud-icon{
-  width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-  font-size:18px;background:rgba(0,0,0,0.4);border:1px solid var(--border);
-}
+.hud-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(0,0,0,0.4);border:1px solid var(--border)}
 .hud-info .h-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;font-weight:700}
 .hud-info .h-val{font-size:18px;font-weight:900;font-family:'Cinzel',serif;letter-spacing:0.5px}
 .h-val.hp{color:var(--green2)}
@@ -175,36 +125,17 @@ body::after{
 .h-val.round{color:var(--purple2)}
 .h-val.wins{color:var(--blue)}
 
-.game-grid{
-  flex:1;display:grid;grid-template-columns:auto 1fr 320px;gap:12px;
-  min-height:0;
-}
+.game-grid{flex:1;display:grid;grid-template-columns:auto 1fr 320px;gap:12px;min-height:0}
 @media(max-width:1200px){.game-grid{grid-template-columns:1fr;grid-template-rows:auto auto auto}}
-
 .panel{padding:16px;overflow:auto;position:relative}
-.panel-title{
-  font-family:'Cinzel',serif;font-weight:800;font-size:12px;letter-spacing:2px;
-  text-transform:uppercase;color:var(--gold2);margin-bottom:14px;
-  display:flex;justify-content:space-between;align-items:center;
-}
-.panel-title::before{
-  content:'';position:absolute;left:16px;right:16px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--border2) 20%,var(--border2) 80%,transparent);
-  margin-top:28px;
-}
+.panel-title{font-family:'Cinzel',serif;font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gold2);margin-bottom:14px;display:flex;justify-content:space-between;align-items:center}
+.panel-title::before{content:'';position:absolute;left:16px;right:16px;height:1px;background:linear-gradient(90deg,transparent,var(--border2) 20%,var(--border2) 80%,transparent);margin-top:28px}
 .panel-title span{background:var(--bg2);padding:0 10px;position:relative;z-index:1}
 
 /* РЮКЗАК */
 .bp-wrap{position:relative;margin:0 auto}
-.bp-grid{
-  display:grid;grid-template-columns:repeat(6,62px);grid-template-rows:repeat(5,62px);
-  gap:5px;padding:12px;background:rgba(0,0,0,0.35);
-  border-radius:16px;position:relative;border:1px solid var(--border);
-}
-.bp-cell{
-  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);
-  border-radius:8px;transition:all 0.15s;
-}
+.bp-grid{display:grid;grid-template-columns:repeat(6,62px);grid-template-rows:repeat(5,62px);gap:5px;padding:12px;background:rgba(0,0,0,0.35);border-radius:16px;position:relative;border:1px solid var(--border)}
+.bp-cell{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);border-radius:8px;transition:all 0.15s}
 .bp-cell.hl-ok{background:rgba(74,222,128,0.15);border-color:var(--green);box-shadow:0 0 12px rgba(74,222,128,0.3) inset}
 .bp-cell.hl-merge{background:rgba(255,200,87,0.2);border-color:var(--gold);box-shadow:0 0 20px rgba(255,200,87,0.4) inset;animation:pulseMerge 1s infinite}
 @keyframes pulseMerge{0%,100%{box-shadow:0 0 20px rgba(255,200,87,0.4) inset}50%{box-shadow:0 0 30px rgba(255,200,87,0.7) inset}}
@@ -213,97 +144,63 @@ body::after{
   position:absolute;border-radius:10px;cursor:grab;user-select:none;
   display:flex;align-items:center;justify-content:center;
   transition:transform 0.15s,box-shadow 0.15s,filter 0.15s;
-  border:2px solid;font-size:26px;
-  background-size:100% 100% !important;
+  border:2px solid;overflow:hidden;
 }
+.item img{width:100%;height:100%;display:block;pointer-events:none}
 .item::before{
   content:'';position:absolute;inset:0;border-radius:8px;
   background:linear-gradient(180deg,rgba(255,255,255,0.15) 0%,transparent 40%,rgba(0,0,0,0.3) 100%);
-  pointer-events:none;
+  pointer-events:none;z-index:1;
 }
 .item::after{
   content:attr(data-tier);position:absolute;bottom:2px;right:4px;
-  font-size:9px;font-weight:900;color:rgba(255,255,255,0.9);
-  text-shadow:0 0 4px #000;font-family:'Cinzel',serif;letter-spacing:0.5px;
+  font-size:9px;font-weight:900;color:rgba(255,255,255,0.95);
+  text-shadow:0 0 4px #000,0 0 8px #000;font-family:'Cinzel',serif;letter-spacing:0.5px;z-index:2;
 }
-.item:hover{
-  transform:scale(1.08);z-index:50;
-  filter:brightness(1.15);box-shadow:0 0 25px currentColor;
-}
+.item:hover{transform:scale(1.08);z-index:50;filter:brightness(1.15);box-shadow:0 0 25px currentColor}
 .item.dragging{opacity:0.35;cursor:grabbing}
-.item[data-rar="1"]{border-color:var(--r1);background:radial-gradient(circle at 50% 30%,rgba(156,163,175,0.4),rgba(30,30,40,0.9));color:var(--r1)}
-.item[data-rar="2"]{border-color:var(--r2);background:radial-gradient(circle at 50% 30%,rgba(74,222,128,0.4),rgba(20,40,25,0.9));color:var(--r2);box-shadow:0 0 12px rgba(74,222,128,0.25)}
-.item[data-rar="3"]{border-color:var(--r3);background:radial-gradient(circle at 50% 30%,rgba(96,165,250,0.45),rgba(20,30,55,0.9));color:var(--r3);box-shadow:0 0 15px rgba(96,165,250,0.35)}
-.item[data-rar="4"]{border-color:var(--r4);background:radial-gradient(circle at 50% 30%,rgba(167,139,250,0.5),rgba(35,25,55,0.9));color:var(--r4);box-shadow:0 0 20px rgba(167,139,250,0.45);animation:glow4 2.5s ease infinite}
-.item[data-rar="5"]{border-color:var(--r5);background:radial-gradient(circle at 50% 30%,rgba(255,200,87,0.6),rgba(60,40,10,0.9));color:var(--r5);box-shadow:0 0 25px rgba(255,200,87,0.6);animation:glow5 2s ease infinite}
-@keyframes glow4{0%,100%{box-shadow:0 0 20px rgba(167,139,250,0.45)}50%{box-shadow:0 0 30px rgba(167,139,250,0.8)}}
-@keyframes glow5{0%,100%{box-shadow:0 0 25px rgba(255,200,87,0.6)}50%{box-shadow:0 0 40px rgba(255,200,87,1)}}
+.item[data-rar="1"]{border-color:var(--r1);color:var(--r1);box-shadow:0 0 8px rgba(156,163,175,0.2)}
+.item[data-rar="2"]{border-color:var(--r2);color:var(--r2);box-shadow:0 0 12px rgba(74,222,128,0.35)}
+.item[data-rar="3"]{border-color:var(--r3);color:var(--r3);box-shadow:0 0 15px rgba(96,165,250,0.45)}
+.item[data-rar="4"]{border-color:var(--r4);color:var(--r4);box-shadow:0 0 20px rgba(167,139,250,0.55);animation:glow4 2.5s ease infinite}
+.item[data-rar="5"]{border-color:var(--r5);color:var(--r5);box-shadow:0 0 25px rgba(255,200,87,0.7);animation:glow5 2s ease infinite}
+@keyframes glow4{0%,100%{box-shadow:0 0 20px rgba(167,139,250,0.55)}50%{box-shadow:0 0 30px rgba(167,139,250,0.9)}}
+@keyframes glow5{0%,100%{box-shadow:0 0 25px rgba(255,200,87,0.7)}50%{box-shadow:0 0 40px rgba(255,200,87,1)}}
 
 /* МАГАЗИН */
 .shop-list{display:flex;flex-direction:column;gap:8px;max-height:calc(100vh - 380px);overflow-y:auto;padding-right:6px}
-.shop-item{
-  display:flex;gap:12px;padding:12px;background:rgba(15,15,28,0.6);
-  border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s;
-  align-items:center;position:relative;overflow:hidden;
-}
-.shop-item::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--r,var(--r1));
-  box-shadow:0 0 12px var(--r,var(--r1));
-}
-.shop-item:hover:not(.disabled){
-  border-color:var(--r,var(--purple));transform:translateX(3px);
-  background:rgba(25,25,45,0.8);box-shadow:0 5px 20px rgba(0,0,0,0.4),0 0 20px var(--r,transparent);
-}
+.shop-item{display:flex;gap:12px;padding:12px;background:rgba(15,15,28,0.6);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:all 0.2s;align-items:center;position:relative;overflow:hidden}
+.shop-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--r,var(--r1));box-shadow:0 0 12px var(--r,var(--r1))}
+.shop-item:hover:not(.disabled){border-color:var(--r,var(--purple));transform:translateX(3px);background:rgba(25,25,45,0.8);box-shadow:0 5px 20px rgba(0,0,0,0.4),0 0 20px var(--r,transparent)}
 .shop-item.disabled{opacity:0.4;cursor:not-allowed}
-.si-icon{
-  width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;
-  font-size:26px;background:radial-gradient(circle at 50% 30%,rgba(255,255,255,0.1),rgba(0,0,0,0.5));
-  border:2px solid var(--r,var(--r1));flex-shrink:0;position:relative;
-}
-.si-icon .si-tier{
-  position:absolute;bottom:-2px;right:-2px;background:var(--bg);border:1px solid var(--r,var(--r1));
-  color:var(--r,var(--r1));font-size:9px;font-weight:900;padding:1px 4px;border-radius:4px;
-  font-family:'Cinzel',serif;
-}
+.si-icon{width:52px;height:52px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);border:2px solid var(--r,var(--r1));flex-shrink:0;position:relative;overflow:hidden}
+.si-icon img{width:100%;height:100%}
+.si-icon .si-tier{position:absolute;bottom:-2px;right:-2px;background:var(--bg);border:1px solid var(--r,var(--r1));color:var(--r,var(--r1));font-size:9px;font-weight:900;padding:1px 4px;border-radius:4px;font-family:'Cinzel',serif;z-index:3}
 .si-info{flex:1;min-width:0}
 .si-name{font-size:13px;font-weight:800;color:var(--r,var(--text));margin-bottom:3px}
 .si-desc{font-size:11px;color:var(--muted);line-height:1.4}
-.si-price{
-  font-family:'Cinzel',serif;font-weight:900;color:var(--gold2);font-size:14px;
-  white-space:nowrap;flex-shrink:0;
-}
+.si-price{font-family:'Cinzel',serif;font-weight:900;color:var(--gold2);font-size:14px;white-space:nowrap;flex-shrink:0}
 
-/* ИНФО ПРЕДМЕТА */
-.item-info{
-  margin-top:12px;padding:14px;min-height:120px;background:rgba(0,0,0,0.4);
-  border:1px solid var(--border);border-radius:12px;font-size:12px;color:var(--muted);line-height:1.5;
-}
-.ii-name{font-size:15px;font-weight:800;margin-bottom:6px;font-family:'Cinzel',serif;letter-spacing:0.5px}
-.ii-desc{margin-bottom:8px;color:var(--text);font-size:12px}
+.item-info{margin-top:12px;padding:14px;min-height:120px;background:rgba(0,0,0,0.4);border:1px solid var(--border);border-radius:12px;font-size:12px;color:var(--muted);line-height:1.5}
+.ii-head{display:flex;gap:12px;align-items:center;margin-bottom:8px}
+.ii-head img{width:52px;height:52px}
+.ii-name{font-size:15px;font-weight:800;font-family:'Cinzel',serif;letter-spacing:0.5px}
+.ii-desc{margin-bottom:8px;color:var(--text);font-size:12px;margin-top:6px}
 .ii-stats{color:var(--green2);font-family:'Consolas',monospace;line-height:1.7;font-size:11px}
-.ii-merge{
-  margin-top:10px;padding:8px 10px;background:rgba(255,200,87,0.1);
-  border:1px dashed var(--gold);border-radius:8px;color:var(--gold2);font-size:11px;
-}
+.ii-merge{margin-top:10px;padding:8px 10px;background:rgba(255,200,87,0.1);border:1px dashed var(--gold);border-radius:8px;color:var(--gold2);font-size:11px}
 
 /* ОНЛАЙН */
-.player-row{
-  display:flex;gap:10px;padding:10px;background:rgba(15,15,28,0.6);
-  border-radius:10px;margin-bottom:8px;border:1px solid var(--border);align-items:center;
-}
-.pr-avatar{width:36px;height:36px;border-radius:10px;background:rgba(0,0,0,0.4);flex-shrink:0}
+.player-row{display:flex;gap:10px;padding:10px;background:rgba(15,15,28,0.6);border-radius:10px;margin-bottom:8px;border:1px solid var(--border);align-items:center}
+.pr-avatar{width:40px;height:40px;border-radius:10px;background:rgba(0,0,0,0.4);flex-shrink:0;overflow:hidden}
+.pr-avatar img{width:100%;height:100%}
 .pr-name{font-size:12px;font-weight:800;color:var(--purple2)}
 .pr-sub{font-size:10px;color:var(--muted);margin-top:2px}
 .pr-hp{font-size:11px;color:var(--green2);font-weight:700;font-family:'Cinzel',serif}
 
-/* ============ БОЙ ============ */
-.overlay{
-  position:fixed;inset:0;background:rgba(5,4,2,0.92);backdrop-filter:blur(12px);
-  z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow:auto;
-}
+/* БОЙ */
+.overlay{position:fixed;inset:0;background:rgba(5,4,2,0.92);backdrop-filter:blur(12px);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px;overflow:auto}
 .overlay.show{display:flex;animation:fadeIn 0.3s}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
 .battle-modal{
   width:100%;max-width:1100px;padding:28px;
   background:linear-gradient(180deg,rgba(25,20,40,0.95),rgba(15,10,25,0.98));
@@ -318,7 +215,6 @@ body::after{
   letter-spacing:3px;margin-bottom:4px;filter:drop-shadow(0 0 20px rgba(255,200,87,0.5));
 }
 .battle-sub{text-align:center;color:var(--muted);font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
-
 .arena{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:start;margin-bottom:16px}
 @media(max-width:800px){.arena{grid-template-columns:1fr;gap:8px}.vs{transform:rotate(90deg);padding:0 !important}}
 .fighter{padding:16px;border-radius:16px;background:rgba(0,0,0,0.4);border:2px solid var(--border);transition:all 0.3s}
@@ -327,55 +223,29 @@ body::after{
 .fighter.shake{animation:shake 0.3s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 .fighter-head{display:flex;gap:12px;align-items:center;margin-bottom:10px}
-.fighter-head img{width:52px;height:52px;border-radius:12px;background:rgba(0,0,0,0.3);border:2px solid currentColor}
-.fighter.me .fighter-head img{border-color:var(--green)}
-.fighter.enemy .fighter-head img{border-color:var(--red)}
+.fighter-head .portrait{width:56px;height:56px;border-radius:12px;background:rgba(0,0,0,0.3);border:2px solid currentColor;padding:4px}
+.fighter.me .fighter-head .portrait{border-color:var(--green)}
+.fighter.enemy .fighter-head .portrait{border-color:var(--red)}
 .fighter-name{font-family:'Cinzel',serif;font-weight:900;font-size:16px;letter-spacing:1px}
 .fighter.me .fighter-name{color:var(--green2)}
 .fighter.enemy .fighter-name{color:var(--red2)}
 .fighter-role{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
 
-.hp-bar{
-  height:22px;background:rgba(0,0,0,0.6);border-radius:11px;overflow:hidden;
-  position:relative;margin-bottom:12px;border:1px solid rgba(255,255,255,0.1);
-}
-.hp-bar .fill{
-  height:100%;transition:width 0.3s ease;
-  background:linear-gradient(90deg,#22c55e,#4ade80,#86efac);
-  box-shadow:0 0 20px rgba(74,222,128,0.5);
-  position:relative;overflow:hidden;
-}
+.hp-bar{height:22px;background:rgba(0,0,0,0.6);border-radius:11px;overflow:hidden;position:relative;margin-bottom:12px;border:1px solid rgba(255,255,255,0.1)}
+.hp-bar .fill{height:100%;transition:width 0.3s ease;background:linear-gradient(90deg,#22c55e,#4ade80,#86efac);box-shadow:0 0 20px rgba(74,222,128,0.5);position:relative;overflow:hidden}
 .hp-bar.enemy .fill{background:linear-gradient(90deg,#dc2626,#f87171,#fca5a5);box-shadow:0 0 20px rgba(248,113,113,0.5)}
-.hp-bar .fill::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(255,255,255,0.35),transparent 50%);
-}
-.hp-bar .text{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:900;color:#fff;font-family:'Cinzel',serif;
-  text-shadow:0 0 6px #000,0 0 3px #000;letter-spacing:1px;
-}
+.hp-bar .fill::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,0.35),transparent 50%)}
+.hp-bar .text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;font-family:'Cinzel',serif;text-shadow:0 0 6px #000;letter-spacing:1px}
 
 .stats-row{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;font-size:11px;font-family:'Consolas',monospace}
-.stat-pill{
-  padding:4px 8px;background:rgba(255,255,255,0.05);border-radius:6px;
-  display:flex;justify-content:space-between;
-}
+.stat-pill{padding:4px 8px;background:rgba(255,255,255,0.05);border-radius:6px;display:flex;justify-content:space-between}
 .stat-pill span:first-child{color:var(--muted)}
 .stat-pill span:last-child{color:var(--text);font-weight:700}
 
-.vs{
-  font-family:'Cinzel',serif;font-size:36px;font-weight:900;
-  color:var(--purple2);text-shadow:0 0 30px rgba(167,139,250,0.8),0 0 60px rgba(167,139,250,0.4);
-  padding:20px;letter-spacing:3px;animation:pulseVs 2s ease infinite;
-}
+.vs{font-family:'Cinzel',serif;font-size:36px;font-weight:900;color:var(--purple2);text-shadow:0 0 30px rgba(167,139,250,0.8);padding:20px;letter-spacing:3px;animation:pulseVs 2s ease infinite}
 @keyframes pulseVs{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
 
-.battle-log{
-  padding:14px;background:rgba(0,0,0,0.5);border-radius:12px;max-height:220px;
-  overflow-y:auto;font-family:'Consolas',monospace;font-size:12px;line-height:1.8;
-  border:1px solid var(--border);
-}
+.battle-log{padding:14px;background:rgba(0,0,0,0.5);border-radius:12px;max-height:220px;overflow-y:auto;font-family:'Consolas',monospace;font-size:12px;line-height:1.8;border:1px solid var(--border)}
 .log-line{padding:2px 0;animation:logIn 0.3s}
 @keyframes logIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
 .log-dmg{color:var(--red2)}
@@ -385,45 +255,23 @@ body::after{
 .log-win{color:var(--gold2);font-weight:900;font-size:15px;text-align:center;padding:6px 0;text-shadow:0 0 12px currentColor}
 .log-lose{color:var(--red);font-weight:900;font-size:15px;text-align:center;padding:6px 0;text-shadow:0 0 12px currentColor}
 
-.float-dmg{
-  position:fixed;font-family:'Cinzel',serif;font-weight:900;font-size:24px;
-  color:var(--red);text-shadow:0 0 12px currentColor,0 2px 4px #000;
-  pointer-events:none;z-index:9999;animation:floatUp 1s forwards;
-}
+.float-dmg{position:fixed;font-family:'Cinzel',serif;font-weight:900;font-size:24px;color:var(--red);text-shadow:0 0 12px currentColor,0 2px 4px #000;pointer-events:none;z-index:9999;animation:floatUp 1s forwards}
 @keyframes floatUp{from{transform:translateY(0);opacity:1}to{transform:translateY(-60px);opacity:0}}
 
-/* УВЕДОМЛЕНИЯ */
 #notify{position:fixed;top:20px;right:20px;z-index:2000;display:flex;flex-direction:column;gap:10px;max-width:340px}
-.notify{
-  padding:14px 20px;background:rgba(20,20,35,0.95);backdrop-filter:blur(20px);
-  border-left:4px solid var(--purple);border-radius:12px;color:var(--text);
-  font-size:13px;font-weight:600;box-shadow:0 10px 40px rgba(0,0,0,0.6);
-  animation:slideIn 0.35s cubic-bezier(0.34,1.56,0.64,1);
-}
+.notify{padding:14px 20px;background:rgba(20,20,35,0.95);backdrop-filter:blur(20px);border-left:4px solid var(--purple);border-radius:12px;color:var(--text);font-size:13px;font-weight:600;box-shadow:0 10px 40px rgba(0,0,0,0.6);animation:slideIn 0.35s cubic-bezier(0.34,1.56,0.64,1)}
 .notify.success{border-color:var(--green)}
 .notify.error{border-color:var(--red)}
 .notify.info{border-color:var(--blue)}
 .notify.gold{border-color:var(--gold)}
 @keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-.round-banner{
-  padding:14px 20px;text-align:center;
-  background:linear-gradient(90deg,transparent,rgba(167,139,250,0.15),transparent);
-  border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);
-  font-size:13px;color:var(--purple2);font-weight:600;letter-spacing:1px;
-}
+.round-banner{padding:14px 20px;text-align:center;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.15),transparent);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);font-size:13px;color:var(--purple2);font-weight:600;letter-spacing:1px}
 .round-banner b{color:var(--gold2);font-family:'Cinzel',serif}
-
-.combo-hint{
-  margin-top:10px;padding:8px 12px;border-radius:8px;
-  background:rgba(255,200,87,0.08);border:1px dashed rgba(255,200,87,0.4);
-  font-size:11px;color:var(--gold2);text-align:center;
-}
 </style>
 </head>
 <body>
 
-<!-- ЭКРАН ВХОДА -->
 <div id="loginScreen" class="screen active">
   <div class="hero-logo">
     <h1>BACKPACK BRAWL</h1>
@@ -449,33 +297,32 @@ body::after{
   </div>
 </div>
 
-<!-- ИГРОВОЙ ЭКРАН -->
 <div id="gameScreen" class="screen">
   <div class="glass top-bar">
     <div class="hud">
       <div class="hud-item">
-        <div class="hud-icon">❤️</div>
+        <div class="hud-icon" style="color:var(--green2);font-weight:900;">HP</div>
         <div class="hud-info">
           <div class="h-label">Здоровье</div>
           <div class="h-val hp" id="hudHp">100</div>
         </div>
       </div>
       <div class="hud-item">
-        <div class="hud-icon">💰</div>
+        <div class="hud-icon" style="color:var(--gold2);font-weight:900;">💰</div>
         <div class="hud-info">
           <div class="h-label">Золото</div>
           <div class="h-val gold" id="hudGold">10</div>
         </div>
       </div>
       <div class="hud-item">
-        <div class="hud-icon">🏆</div>
+        <div class="hud-icon" style="color:var(--purple2);font-weight:900;">№</div>
         <div class="hud-info">
           <div class="h-label">Раунд</div>
           <div class="h-val round" id="hudRound">1</div>
         </div>
       </div>
       <div class="hud-item">
-        <div class="hud-icon">⚔️</div>
+        <div class="hud-icon" style="color:var(--blue);font-weight:900;">★</div>
         <div class="hud-info">
           <div class="h-label">Победы</div>
           <div class="h-val wins" id="hudWins">0/0</div>
@@ -516,7 +363,6 @@ body::after{
   </div>
 </div>
 
-<!-- МОДАЛКА БОЯ -->
 <div id="battleOverlay" class="overlay">
   <div class="battle-modal">
     <div class="battle-title" id="battleTitle">⚔️ БОЙ</div>
@@ -554,155 +400,399 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.database();
 
 // ============================================================
-// КОНСТАНТЫ
+// SVG ИКОНКИ ПРЕДМЕТОВ (все рисуются кодом, работают везде)
 // ============================================================
-const GW=6, GH=5;
-const CELL=62, GAP=5, PAD=12;
-const RARITY_COLORS = ["#9ca3af","#4ade80","#60a5fa","#a78bfa","#ffc857"];
+const TIER_PALETTE = [
+  { c1:"#e2e8f0", c2:"#94a3b8", c3:"#475569", glow:"#cbd5e1", bg1:"#2a2a35", bg2:"#14141c" },
+  { c1:"#a7f3d0", c2:"#34d399", c3:"#065f46", glow:"#6ee7b7", bg1:"#1a2e28", bg2:"#0a1512" },
+  { c1:"#bfdbfe", c2:"#60a5fa", c3:"#1e40af", glow:"#93c5fd", bg1:"#1a2235", bg2:"#0a1018" },
+  { c1:"#ddd6fe", c2:"#a78bfa", c3:"#5b21b6", glow:"#c4b5fd", bg1:"#251a35", bg2:"#120a1c" },
+  { c1:"#fef3c7", c2:"#fbbf24", c3:"#b45309", glow:"#fde68a", bg1:"#352a15", bg2:"#1c1405" }
+];
+
+function svgWrap(inner, tier, shape) {
+  const t = TIER_PALETTE[tier-1];
+  const id = Math.random().toString(36).slice(2,8);
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+    <defs>
+      <radialGradient id="bg${id}" cx="50%" cy="40%">
+        <stop offset="0%" stop-color="${t.bg1}"/>
+        <stop offset="100%" stop-color="${t.bg2}"/>
+      </radialGradient>
+      <linearGradient id="m${id}" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="${t.c1}"/>
+        <stop offset="50%" stop-color="${t.c2}"/>
+        <stop offset="100%" stop-color="${t.c3}"/>
+      </linearGradient>
+      <linearGradient id="g${id}" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="${t.c1}"/>
+        <stop offset="100%" stop-color="${t.c2}"/>
+      </linearGradient>
+      <filter id="gl${id}">
+        <feGaussianBlur stdDeviation="1.5"/>
+      </filter>
+    </defs>
+    <rect width="64" height="64" rx="10" fill="url(#bg${id})"/>
+    <circle cx="32" cy="30" r="22" fill="${t.glow}" opacity="0.08" filter="url(#gl${id})"/>
+    ${shape(id, t)}
+  </svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
+// Мага возвращает SVG-строку для конкретного типа предмета
+function shapeSword(id, t) {
+  return `
+    <path d="M32 6 L36 16 L36 44 L28 44 L28 16 Z" fill="url(#m${id})" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M32 8 L34 16 L34 42 L32 42 Z" fill="${t.c1}" opacity="0.6"/>
+    <rect x="20" y="44" width="24" height="4" rx="1" fill="url(#g${id})" stroke="${t.c3}" stroke-width="0.5"/>
+    <rect x="30" y="48" width="4" height="10" fill="${t.c3}"/>
+    <circle cx="32" cy="59" r="3" fill="url(#g${id})" stroke="${t.c3}" stroke-width="0.5"/>
+  `;
+}
+function shapeDagger(id, t) {
+  return `
+    <path d="M32 12 L36 22 L36 40 L28 40 L28 22 Z" fill="url(#m${id})" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M32 14 L34 22 L34 38 L32 38 Z" fill="${t.c1}" opacity="0.7"/>
+    <rect x="22" y="40" width="20" height="3" rx="1" fill="url(#g${id})" stroke="${t.c3}" stroke-width="0.5"/>
+    <rect x="30" y="43" width="4" height="12" fill="${t.c3}"/>
+    <circle cx="32" cy="57" r="2.5" fill="url(#g${id})"/>
+  `;
+}
+function shapeBow(id, t) {
+  return `
+    <path d="M18 10 Q52 32 18 54" fill="none" stroke="url(#m${id})" stroke-width="5" stroke-linecap="round"/>
+    <path d="M18 10 Q52 32 18 54" fill="none" stroke="${t.c1}" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    <line x1="18" y1="10" x2="18" y2="54" stroke="${t.c3}" stroke-width="1"/>
+    <line x1="14" y1="32" x2="46" y2="32" stroke="${t.c1}" stroke-width="2"/>
+    <path d="M46 32 L40 29 L40 35 Z" fill="${t.c2}"/>
+    <path d="M14 32 L20 29 L20 35 Z" fill="${t.c3}"/>
+  `;
+}
+function shapeStaff(id, t) {
+  return `
+    <rect x="30" y="20" width="4" height="40" fill="${t.c3}" rx="2"/>
+    <rect x="30" y="20" width="2" height="40" fill="${t.c2}" opacity="0.5" rx="1"/>
+    <circle cx="32" cy="16" r="10" fill="url(#g${id})" opacity="0.9"/>
+    <circle cx="32" cy="16" r="10" fill="none" stroke="${t.c1}" stroke-width="1.5"/>
+    <circle cx="32" cy="16" r="5" fill="${t.c1}" opacity="0.8"/>
+    <circle cx="30" cy="13" r="2" fill="#fff" opacity="0.9"/>
+    <circle cx="32" cy="16" r="14" fill="none" stroke="${t.glow}" stroke-width="0.8" opacity="0.5"/>
+  `;
+}
+function shapeAxe(id, t) {
+  return `
+    <rect x="30" y="14" width="4" height="46" fill="${t.c3}" rx="2"/>
+    <path d="M30 14 Q20 12 16 22 Q14 32 22 38 L30 34 Z" fill="url(#m${id})" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M30 14 Q40 12 44 22 Q46 32 38 38 L30 34 Z" fill="url(#m${id})" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M30 16 Q22 16 20 22 L28 20 Z" fill="${t.c1}" opacity="0.5"/>
+    <rect x="28" y="34" width="8" height="3" fill="${t.c3}"/>
+  `;
+}
+function shapeMace(id, t) {
+  return `
+    <rect x="30" y="26" width="4" height="34" fill="${t.c3}" rx="2"/>
+    <circle cx="32" cy="18" r="12" fill="url(#g${id})" stroke="${t.c3}" stroke-width="1"/>
+    <circle cx="32" cy="18" r="12" fill="none" stroke="${t.c1}" stroke-width="0.5" opacity="0.5"/>
+    <line x1="32" y1="4" x2="32" y2="8" stroke="${t.c1}" stroke-width="2.5"/>
+    <line x1="32" y1="28" x2="32" y2="32" stroke="${t.c1}" stroke-width="2.5"/>
+    <line x1="18" y1="18" x2="22" y2="18" stroke="${t.c1}" stroke-width="2.5"/>
+    <line x1="42" y1="18" x2="46" y2="18" stroke="${t.c1}" stroke-width="2.5"/>
+    <line x1="22" y1="8" x2="25" y2="11" stroke="${t.c1}" stroke-width="2"/>
+    <line x1="42" y1="8" x2="39" y2="11" stroke="${t.c1}" stroke-width="2"/>
+    <line x1="22" y1="28" x2="25" y2="25" stroke="${t.c1}" stroke-width="2"/>
+    <line x1="42" y1="28" x2="39" y2="25" stroke="${t.c1}" stroke-width="2"/>
+    <circle cx="28" cy="14" r="3" fill="${t.c1}" opacity="0.6"/>
+  `;
+}
+function shapeHeavyArmor(id, t) {
+  return `
+    <path d="M14 18 Q14 14 18 14 L26 14 L32 20 L38 14 L46 14 Q50 14 50 18 L50 32 L46 36 L46 52 Q46 54 44 54 L20 54 Q18 54 18 52 L18 36 L14 32 Z" fill="url(#m${id})" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M26 14 L32 20 L38 14 L38 24 L32 26 L26 24 Z" fill="${t.c3}" opacity="0.5"/>
+    <line x1="32" y1="26" x2="32" y2="54" stroke="${t.c3}" stroke-width="1" opacity="0.6"/>
+    <path d="M20 32 Q20 30 22 30 L42 30 Q44 30 44 32 L44 46 Q44 48 42 48 L22 48 Q20 48 20 46 Z" fill="none" stroke="${t.c1}" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="32" cy="39" r="3" fill="${t.c1}" opacity="0.7"/>
+  `;
+}
+function shapeLightArmor(id, t) {
+  return `
+    <path d="M22 12 L32 18 L42 12 L48 22 L44 26 L44 54 Q44 56 42 56 L22 56 Q20 56 20 54 L20 26 L16 22 Z" fill="url(#m${id})" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M22 12 L32 18 L42 12 L42 22 L32 26 L22 22 Z" fill="${t.c3}" opacity="0.5"/>
+    <line x1="32" y1="26" x2="32" y2="56" stroke="${t.c3}" stroke-width="1" opacity="0.5"/>
+    <circle cx="32" cy="42" r="5" fill="none" stroke="${t.c1}" stroke-width="1"/>
+    <path d="M30 42 L32 40 L34 42 L32 44 Z" fill="${t.c1}"/>
+    <path d="M24 32 Q32 36 40 32" fill="none" stroke="${t.c1}" stroke-width="0.8" opacity="0.7"/>
+  `;
+}
+function shapePotion(id, t) {
+  return `
+    <rect x="28" y="8" width="8" height="4" fill="${t.c3}" rx="1"/>
+    <path d="M28 12 L28 20 Q20 26 20 40 Q20 54 32 54 Q44 54 44 40 Q44 26 36 20 L36 12 Z" fill="url(#m${id})" opacity="0.85" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M28 12 L28 20 Q20 26 20 40 Q20 46 23 50 Q26 44 30 42 Q34 42 36 40 Q42 34 36 20 L36 12 Z" fill="${t.c1}" opacity="0.4"/>
+    <ellipse cx="26" cy="44" rx="3" ry="4" fill="${t.c1}" opacity="0.6"/>
+    <circle cx="26" cy="24" r="1.5" fill="#fff" opacity="0.7"/>
+    <circle cx="28" cy="30" r="1" fill="#fff" opacity="0.5"/>
+  `;
+}
+function shapeRing(id, t) {
+  return `
+    <circle cx="32" cy="38" r="14" fill="none" stroke="url(#m${id})" stroke-width="5"/>
+    <circle cx="32" cy="38" r="14" fill="none" stroke="${t.c1}" stroke-width="1.5" opacity="0.6"/>
+    <path d="M22 26 L32 14 L42 26 L32 34 Z" fill="url(#g${id})" stroke="${t.c3}" stroke-width="1"/>
+    <path d="M24 26 L32 18 L40 26 L32 30 Z" fill="${t.c1}" opacity="0.7"/>
+    <circle cx="28" cy="22" r="2" fill="#fff" opacity="0.9"/>
+    <circle cx="36" cy="40" r="2" fill="${t.c1}" opacity="0.5"/>
+  `;
+}
+
+const SHAPE_FN = {
+  sword: shapeSword,
+  dagger: shapeDagger,
+  bow: shapeBow,
+  staff: shapeStaff,
+  axe: shapeAxe,
+  mace: shapeMace,
+  heavy_armor: shapeHeavyArmor,
+  light_armor: shapeLightArmor,
+  potion: shapePotion,
+  ring: shapeRing
+};
+
+function makeItemIcon(chain, tier) {
+  const fn = SHAPE_FN[chain] || shapeSword;
+  return svgWrap(null, tier, fn);
+}
+
+// ============================================================
+// SVG ПОРТРЕТЫ ПЕРСОНАЖЕЙ
+// ============================================================
+function makePortraitSVG(key) {
+  const palettes = {
+    knight:    { bg1:"#1e3a5f", bg2:"#0a1628", armor:"#60a5fa", accent:"#bfdbfe", skin:"#e0b48e", accent2:"#1e40af" },
+    wizard:    { bg1:"#3a1f5c", bg2:"#150828", armor:"#a78bfa", accent:"#ddd6fe", skin:"#f0c9a4", accent2:"#5b21b6" },
+    rogue:     { bg1:"#1f3a1f", bg2:"#0a1e0a", armor:"#4ade80", accent:"#bbf7d0", skin:"#c9a07a", accent2:"#166534" },
+    cleric:    { bg1:"#5c3f1f", bg2:"#281808", armor:"#fbbf24", accent:"#fef3c7", skin:"#e8c4a0", accent2:"#92400e" },
+    barbarian: { bg1:"#5c1f1f", bg2:"#280a0a", armor:"#f87171", accent:"#fecaca", skin:"#d4a574", accent2:"#991b1b" },
+    ranger:    { bg1:"#3f1f3f", bg2:"#180818", armor:"#f472b6", accent:"#fbcfe8", skin:"#d4a574", accent2:"#831843" }
+  };
+  const p = palettes[key];
+  const id = Math.random().toString(36).slice(2,8);
+  
+  let face = "";
+  let extras = "";
+  
+  if (key === "knight") {
+    // Шлем с крестообразным забралом
+    face = `
+      <path d="M22 22 Q22 14 32 14 Q42 14 42 22 L42 40 Q42 52 32 52 Q22 52 22 40 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1.5"/>
+      <path d="M22 22 Q22 14 32 14 Q42 14 42 22 L42 40 Q42 52 32 52 Q22 52 22 40 Z" fill="none" stroke="${p.accent}" stroke-width="0.8"/>
+      <rect x="26" y="26" width="12" height="14" rx="1" fill="${p.bg2}"/>
+      <rect x="26" y="26" width="12" height="3" fill="${p.accent2}"/>
+      <rect x="30" y="26" width="4" height="14" fill="${p.accent2}"/>
+      <path d="M16 26 L22 24 L22 30 L16 32 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M48 26 L42 24 L42 30 L48 32 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M22 14 L32 8 L42 14 L42 18 L32 12 L22 18 Z" fill="${p.accent}" opacity="0.8"/>
+    `;
+  } else if (key === "wizard") {
+    // Остроконечная шляпа со звёздами
+    face = `
+      <path d="M32 4 L20 26 L44 26 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1.5"/>
+      <path d="M18 26 L46 26 L46 30 L18 30 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+      <circle cx="32" cy="14" r="1.5" fill="#fff"/>
+      <circle cx="28" cy="20" r="1" fill="${p.accent}"/>
+      <circle cx="36" cy="19" r="1.2" fill="${p.accent}"/>
+      <circle cx="32" cy="34" r="10" fill="${p.skin}" stroke="${p.accent2}" stroke-width="1"/>
+      <ellipse cx="28" cy="33" rx="1.5" ry="2" fill="#1a1a1a"/>
+      <ellipse cx="36" cy="33" rx="1.5" ry="2" fill="#1a1a1a"/>
+      <circle cx="28.5" cy="32.5" r="0.5" fill="#fff"/>
+      <circle cx="36.5" cy="32.5" r="0.5" fill="#fff"/>
+      <path d="M28 38 Q32 40 36 38" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+      <path d="M20 42 Q32 46 44 42 L46 54 Q32 58 18 54 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M32 44 L34 48 L38 48 L35 51 L36 55 L32 53 L28 55 L29 51 L26 48 L30 48 Z" fill="${p.accent}" opacity="0.9"/>
+    `;
+  } else if (key === "rogue") {
+    // Капюшон
+    face = `
+      <path d="M18 30 Q18 16 32 14 Q46 16 46 30 L46 46 L18 46 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1.5"/>
+      <path d="M20 44 Q22 30 32 28 Q42 30 44 44 Z" fill="${p.skin}"/>
+      <ellipse cx="27" cy="36" rx="1.8" ry="1.2" fill="#1a1a1a"/>
+      <ellipse cx="37" cy="36" rx="1.8" ry="1.2" fill="#1a1a1a"/>
+      <circle cx="27.5" cy="35.5" r="0.5" fill="${p.accent}"/>
+      <circle cx="37.5" cy="35.5" r="0.5" fill="${p.accent}"/>
+      <path d="M22 42 Q27 45 32 44 Q37 45 42 42 L42 46 L22 46 Z" fill="${p.accent2}"/>
+      <path d="M18 28 L32 22 L46 28 L46 32 L32 26 L18 32 Z" fill="${p.accent2}"/>
+      <path d="M30 20 L32 12 L34 20" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+    `;
+  } else if (key === "cleric") {
+    // Нимб + священнический воротник
+    face = `
+      <circle cx="32" cy="26" r="16" fill="none" stroke="${p.accent}" stroke-width="2" opacity="0.7"/>
+      <circle cx="32" cy="26" r="18" fill="none" stroke="${p.accent}" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="32" cy="32" r="11" fill="${p.skin}" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M22 28 Q32 18 42 28 L42 24 Q32 14 22 24 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+      <ellipse cx="28" cy="32" rx="1.5" ry="2" fill="#1a1a1a"/>
+      <ellipse cx="36" cy="32" rx="1.5" ry="2" fill="#1a1a1a"/>
+      <circle cx="28.5" cy="31.5" r="0.5" fill="#fff"/>
+      <circle cx="36.5" cy="31.5" r="0.5" fill="#fff"/>
+      <path d="M28 38 Q32 41 36 38" fill="none" stroke="#1a1a1a" stroke-width="0.8"/>
+      <path d="M18 44 L32 40 L46 44 L48 58 L16 58 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M28 44 L32 50 L36 44 L38 58 L26 58 Z" fill="${p.accent2}" opacity="0.6"/>
+      <circle cx="32" cy="48" r="2" fill="${p.accent}"/>
+    `;
+  } else if (key === "barbarian") {
+    // Рогатый шлем
+    face = `
+      <path d="M20 20 Q32 12 44 20 L44 34 Q44 46 32 48 Q20 46 20 34 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1.5"/>
+      <path d="M20 20 Q14 12 8 18 Q16 22 20 26 Z" fill="${p.accent}" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M44 20 Q50 12 56 18 Q48 22 44 26 Z" fill="${p.accent}" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M20 20 L32 14 L44 20" fill="none" stroke="${p.accent}" stroke-width="1.5"/>
+      <rect x="24" y="28" width="4" height="4" fill="${p.bg2}"/>
+      <rect x="36" y="28" width="4" height="4" fill="${p.bg2}"/>
+      <circle cx="26" cy="30" r="1" fill="${p.accent}"/>
+      <circle cx="38" cy="30" r="1" fill="${p.accent}"/>
+      <path d="M22 38 Q26 42 32 42 Q38 42 42 38" fill="none" stroke="${p.accent2}" stroke-width="1"/>
+      <path d="M26 44 Q28 50 32 50 Q36 50 38 44 Q36 48 32 48 Q28 48 26 44 Z" fill="${p.accent2}"/>
+      <path d="M20 52 L32 48 L44 52 L44 58 L20 58 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1"/>
+    `;
+  } else if (key === "ranger") {
+    // Капюшон с пером
+    face = `
+      <path d="M18 28 Q20 14 32 12 Q44 14 46 28 L46 40 L18 40 Z" fill="${p.armor}" stroke="${p.accent2}" stroke-width="1.5"/>
+      <path d="M22 38 Q22 28 32 26 Q42 28 42 38 Z" fill="${p.skin}"/>
+      <ellipse cx="28" cy="32" rx="1.5" ry="1.8" fill="#1a1a1a"/>
+      <ellipse cx="36" cy="32" rx="1.5" ry="1.8" fill="#1a1a1a"/>
+      <circle cx="28.4" cy="31.4" r="0.5" fill="#fff"/>
+      <circle cx="36.4" cy="31.4" r="0.5" fill="#fff"/>
+      <path d="M29 37 Q32 39 35 37" fill="none" stroke="#1a1a1a" stroke-width="0.7"/>
+      <path d="M18 26 L32 20 L46 26" fill="none" stroke="${p.accent2}" stroke-width="1.5"/>
+      <path d="M42 14 Q46 8 50 6 Q50 12 46 16 Z" fill="${p.accent}" stroke="${p.accent2}" stroke-width="0.8"/>
+      <path d="M18 44 Q32 42 46 44 L46 58 L18 58 Z" fill="${p.accent2}"/>
+      <path d="M18 44 L32 48 L46 44" fill="none" stroke="${p.accent}" stroke-width="1"/>
+      <line x1="22" y1="48" x2="18" y2="56" stroke="${p.accent}" stroke-width="1.5"/>
+      <line x1="42" y1="48" x2="46" y2="56" stroke="${p.accent}" stroke-width="1.5"/>
+    `;
+  }
+  
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="128" height="128">
+    <defs>
+      <radialGradient id="pbg${id}" cx="50%" cy="40%">
+        <stop offset="0%" stop-color="${p.bg1}"/>
+        <stop offset="100%" stop-color="${p.bg2}"/>
+      </radialGradient>
+      <radialGradient id="pglow${id}" cx="50%" cy="50%">
+        <stop offset="0%" stop-color="${p.armor}" stop-opacity="0.4"/>
+        <stop offset="100%" stop-color="${p.armor}" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="32" cy="32" r="32" fill="url(#pbg${id})"/>
+    <circle cx="32" cy="34" r="26" fill="url(#pglow${id})"/>
+    ${face}
+  </svg>`;
+  return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+}
+
+const PORTRAITS = {};
+Object.keys({knight:0,wizard:0,rogue:0,cleric:0,barbarian:0,ranger:0}).forEach(k => {
+  PORTRAITS[k] = makePortraitSVG(k);
+});
 
 // ============================================================
 // ПЕРСОНАЖИ
 // ============================================================
 const CHARACTERS = {
-  knight: {
-    name:"Рыцарь", emoji:"🛡️", color:"#60a5fa",
-    desc:"Танк. Много HP и брони",
-    hp:120, gold:8,
-    startItems:[
-      {itemKey:"iron_sword",x:0,y:0},
-      {itemKey:"chain_armor",x:2,y:0},
-      {itemKey:"small_potion",x:4,y:0}
-    ]
-  },
-  wizard: {
-    name:"Маг", emoji:"🔮", color:"#a78bfa",
-    desc:"Магия игнорирует броню",
-    hp:80, gold:15,
-    startItems:[
-      {itemKey:"apprentice_staff",x:0,y:0},
-      {itemKey:"silk_robe",x:1,y:0},
-      {itemKey:"small_potion",x:3,y:0},
-      {itemKey:"small_potion",x:4,y:0}
-    ]
-  },
-  rogue: {
-    name:"Вор", emoji:"🗡️", color:"#4ade80",
-    desc:"Быстрые атаки, крит",
-    hp:95, gold:12,
-    startItems:[
-      {itemKey:"dagger",x:0,y:0},
-      {itemKey:"dagger",x:1,y:0},
-      {itemKey:"leather_armor",x:2,y:0}
-    ]
-  },
-  cleric: {
-    name:"Жрец", emoji:"✨", color:"#ffc857",
-    desc:"Много лечения",
-    hp:100, gold:10,
-    startItems:[
-      {itemKey:"mace",x:0,y:0},
-      {itemKey:"chain_armor",x:1,y:0},
-      {itemKey:"small_potion",x:3,y:0},
-      {itemKey:"small_potion",x:4,y:0}
-    ]
-  },
-  barbarian: {
-    name:"Варвар", emoji:"🪓", color:"#f87171",
-    desc:"Огромный урон",
-    hp:140, gold:5,
-    startItems:[
-      {itemKey:"wood_axe",x:0,y:0},
-      {itemKey:"leather_armor",x:2,y:0}
-    ]
-  },
-  ranger: {
-    name:"Стрелок", emoji:"🏹", color:"#f472b6",
-    desc:"Быстрый и точный",
-    hp:90, gold:14,
-    startItems:[
-      {itemKey:"bow",x:0,y:0},
-      {itemKey:"leather_armor",x:1,y:0},
-      {itemKey:"small_potion",x:3,y:0}
-    ]
-  }
+  knight:    { name:"Рыцарь",    color:"#60a5fa", desc:"Танк. Много HP и брони",   hp:120, gold:8,
+    startItems:[{itemKey:"iron_sword",x:0,y:0},{itemKey:"chain_armor",x:2,y:0},{itemKey:"small_potion",x:4,y:0}] },
+  wizard:    { name:"Маг",       color:"#a78bfa", desc:"Магия игнорирует броню",   hp:80,  gold:15,
+    startItems:[{itemKey:"apprentice_staff",x:0,y:0},{itemKey:"silk_robe",x:1,y:0},{itemKey:"small_potion",x:3,y:0},{itemKey:"small_potion",x:4,y:0}] },
+  rogue:     { name:"Вор",       color:"#4ade80", desc:"Быстрые атаки, крит",      hp:95,  gold:12,
+    startItems:[{itemKey:"dagger",x:0,y:0},{itemKey:"dagger",x:1,y:0},{itemKey:"leather_armor",x:2,y:0}] },
+  cleric:    { name:"Жрец",      color:"#fbbf24", desc:"Много лечения",            hp:100, gold:10,
+    startItems:[{itemKey:"mace",x:0,y:0},{itemKey:"chain_armor",x:1,y:0},{itemKey:"small_potion",x:3,y:0},{itemKey:"small_potion",x:4,y:0}] },
+  barbarian: { name:"Варвар",    color:"#f87171", desc:"Огромный урон",            hp:140, gold:5,
+    startItems:[{itemKey:"wood_axe",x:0,y:0},{itemKey:"leather_armor",x:2,y:0}] },
+  ranger:    { name:"Стрелок",   color:"#f472b6", desc:"Быстрый и точный",         hp:90,  gold:14,
+    startItems:[{itemKey:"bow",x:0,y:0},{itemKey:"leather_armor",x:1,y:0},{itemKey:"small_potion",x:3,y:0}] }
 };
 
 // ============================================================
-// БАЗА ПРЕДМЕТОВ (с системой объединения)
-// chain - ключ «семьи», tier - уровень 1..5
-// next - что получится при слиянии с таким же
+// БАЗА ПРЕДМЕТОВ
 // ============================================================
 const ITEMS = {
-  // --- МЕЧИ ---
-  wood_sword:{name:"Деревянный меч",emoji:"🗡️",type:"weapon",chain:"sword",tier:1,size:[1,2],price:3,dmg:5,cd:2.8,next:"iron_sword",desc:"Простой, но рабочий."},
-  iron_sword:{name:"Железный меч",emoji:"⚔️",type:"weapon",chain:"sword",tier:2,size:[1,2],price:8,dmg:9,cd:2.5,next:"steel_sword",desc:"Надёжный клинок."},
-  steel_sword:{name:"Стальной меч",emoji:"🗡️",type:"weapon",chain:"sword",tier:3,size:[1,2],price:18,dmg:15,cd:2.2,next:"magic_sword",desc:"Острее железа."},
-  magic_sword:{name:"Магический клинок",emoji:"⚡",type:"weapon",chain:"sword",tier:4,size:[1,3],price:35,dmg:22,cd:1.9,next:"dragon_blade",desc:"Искрится магией."},
-  dragon_blade:{name:"Клинок дракона",emoji:"🐉",type:"weapon",chain:"sword",tier:5,size:[2,3],price:80,dmg:35,cd:1.6,lifesteal:0.15,desc:"Легендарный. Пьёт жизнь."},
+  // МЕЧИ
+  wood_sword:{name:"Деревянный меч",type:"weapon",chain:"sword",tier:1,size:[1,2],price:3,dmg:5,cd:2.8,next:"iron_sword",desc:"Простой, но рабочий."},
+  iron_sword:{name:"Железный меч",type:"weapon",chain:"sword",tier:2,size:[1,2],price:8,dmg:9,cd:2.5,next:"steel_sword",desc:"Надёжный клинок."},
+  steel_sword:{name:"Стальной меч",type:"weapon",chain:"sword",tier:3,size:[1,2],price:18,dmg:15,cd:2.2,next:"magic_sword",desc:"Острее железа."},
+  magic_sword:{name:"Магический клинок",type:"weapon",chain:"sword",tier:4,size:[1,3],price:35,dmg:22,cd:1.9,next:"dragon_blade",desc:"Искрится магией."},
+  dragon_blade:{name:"Клинок дракона",type:"weapon",chain:"sword",tier:5,size:[2,3],price:80,dmg:35,cd:1.6,lifesteal:0.15,desc:"Легендарный. Пьёт жизнь."},
 
-  // --- КИНЖАЛЫ ---
-  dagger:{name:"Кинжал",emoji:"🔪",type:"weapon",chain:"dagger",tier:1,size:[1,1],price:4,dmg:3,cd:1.1,next:"sharp_dagger",desc:"Быстрые удары."},
-  sharp_dagger:{name:"Острый кинжал",emoji:"🗡️",type:"weapon",chain:"dagger",tier:2,size:[1,1],price:10,dmg:5,cd:0.9,next:"twin_daggers",desc:"Очень быстрый."},
-  twin_daggers:{name:"Парные клинки",emoji:"⚔️",type:"weapon",chain:"dagger",tier:3,size:[1,2],price:22,dmg:8,cd:0.8,next:"shadow_blades",desc:"Режут молниеносно."},
-  shadow_blades:{name:"Теневые клинки",emoji:"🌑",type:"weapon",chain:"dagger",tier:4,size:[2,2],price:42,dmg:12,cd:0.7,lifesteal:0.2,next:"void_daggers",desc:"Крадут жизнь."},
-  void_daggers:{name:"Клинки пустоты",emoji:"🌌",type:"weapon",chain:"dagger",tier:5,size:[2,2],price:90,dmg:18,cd:0.6,lifesteal:0.3,desc:"Легендарные. Невероятно быстры."},
+  // КИНЖАЛЫ
+  dagger:{name:"Кинжал",type:"weapon",chain:"dagger",tier:1,size:[1,1],price:4,dmg:3,cd:1.1,next:"sharp_dagger",desc:"Быстрые удары."},
+  sharp_dagger:{name:"Острый кинжал",type:"weapon",chain:"dagger",tier:2,size:[1,1],price:10,dmg:5,cd:0.9,next:"twin_daggers",desc:"Очень быстрый."},
+  twin_daggers:{name:"Парные клинки",type:"weapon",chain:"dagger",tier:3,size:[1,2],price:22,dmg:8,cd:0.8,next:"shadow_blades",desc:"Режут молниеносно."},
+  shadow_blades:{name:"Теневые клинки",type:"weapon",chain:"dagger",tier:4,size:[2,2],price:42,dmg:12,cd:0.7,lifesteal:0.2,next:"void_daggers",desc:"Крадут жизнь."},
+  void_daggers:{name:"Клинки пустоты",type:"weapon",chain:"dagger",tier:5,size:[2,2],price:90,dmg:18,cd:0.6,lifesteal:0.3,desc:"Легендарные. Невероятно быстры."},
 
-  // --- ЛУКИ ---
-  bow:{name:"Короткий лук",emoji:"🏹",type:"weapon",chain:"bow",tier:1,size:[1,2],price:5,dmg:4,cd:1.5,next:"long_bow",desc:"Точный выстрел."},
-  long_bow:{name:"Длинный лук",emoji:"🏹",type:"weapon",chain:"bow",tier:2,size:[1,2],price:12,dmg:7,cd:1.3,crit:0.05,next:"composite_bow",desc:"Бьёт дальше и сильнее."},
-  composite_bow:{name:"Составной лук",emoji:"🏹",type:"weapon",chain:"bow",tier:3,size:[1,3],price:26,dmg:12,cd:1.1,crit:0.1,next:"dragon_bow",desc:"Мастерский лук."},
-  dragon_bow:{name:"Лук дракона",emoji:"🐉",type:"weapon",chain:"bow",tier:4,size:[1,3],price:50,dmg:18,cd:0.95,crit:0.15,next:"celestial_bow",desc:"Стреляет огнём."},
-  celestial_bow:{name:"Небесный лук",emoji:"✨",type:"weapon",chain:"bow",tier:5,size:[2,3],price:100,dmg:28,cd:0.8,crit:0.25,desc:"Легендарный. Оглушает."},
+  // ЛУКИ
+  bow:{name:"Короткий лук",type:"weapon",chain:"bow",tier:1,size:[1,2],price:5,dmg:4,cd:1.5,next:"long_bow",desc:"Точный выстрел."},
+  long_bow:{name:"Длинный лук",type:"weapon",chain:"bow",tier:2,size:[1,2],price:12,dmg:7,cd:1.3,crit:0.05,next:"composite_bow",desc:"Бьёт дальше и сильнее."},
+  composite_bow:{name:"Составной лук",type:"weapon",chain:"bow",tier:3,size:[1,3],price:26,dmg:12,cd:1.1,crit:0.1,next:"dragon_bow",desc:"Мастерский лук."},
+  dragon_bow:{name:"Лук дракона",type:"weapon",chain:"bow",tier:4,size:[1,3],price:50,dmg:18,cd:0.95,crit:0.15,next:"celestial_bow",desc:"Стреляет огнём."},
+  celestial_bow:{name:"Небесный лук",type:"weapon",chain:"bow",tier:5,size:[2,3],price:100,dmg:28,cd:0.8,crit:0.25,desc:"Легендарный. Оглушает."},
 
-  // --- ПОСОХИ ---
-  apprentice_staff:{name:"Посох ученика",emoji:"🪄",type:"weapon",chain:"staff",tier:1,size:[1,3],price:6,dmg:6,cd:2.2,magic:true,next:"oak_staff",desc:"Магия игнорирует броню."},
-  oak_staff:{name:"Дубовый посох",emoji:"🪄",type:"weapon",chain:"staff",tier:2,size:[1,3],price:14,dmg:11,cd:2.0,magic:true,next:"crystal_staff",desc:"Сгусток маны."},
-  crystal_staff:{name:"Хрустальный посох",emoji:"💎",type:"weapon",chain:"staff",tier:3,size:[1,3],price:30,dmg:18,cd:1.8,magic:true,next:"arcane_staff",desc:"Магия чистой силы."},
-  arcane_staff:{name:"Тайный посох",emoji:"🔮",type:"weapon",chain:"staff",tier:4,size:[2,3],price:55,dmg:26,cd:1.6,magic:true,next:"god_staff",desc:"Пробивает любую защиту."},
-  god_staff:{name:"Посох богов",emoji:"🌟",type:"weapon",chain:"staff",tier:5,size:[2,3],price:110,dmg:38,cd:1.4,magic:true,desc:"Легендарный. Карает врагов."},
+  // ПОСОХИ
+  apprentice_staff:{name:"Посох ученика",type:"weapon",chain:"staff",tier:1,size:[1,3],price:6,dmg:6,cd:2.2,magic:true,next:"oak_staff",desc:"Магия игнорирует броню."},
+  oak_staff:{name:"Дубовый посох",type:"weapon",chain:"staff",tier:2,size:[1,3],price:14,dmg:11,cd:2.0,magic:true,next:"crystal_staff",desc:"Сгусток маны."},
+  crystal_staff:{name:"Хрустальный посох",type:"weapon",chain:"staff",tier:3,size:[1,3],price:30,dmg:18,cd:1.8,magic:true,next:"arcane_staff",desc:"Магия чистой силы."},
+  arcane_staff:{name:"Тайный посох",type:"weapon",chain:"staff",tier:4,size:[2,3],price:55,dmg:26,cd:1.6,magic:true,next:"god_staff",desc:"Пробивает любую защиту."},
+  god_staff:{name:"Посох богов",type:"weapon",chain:"staff",tier:5,size:[2,3],price:110,dmg:38,cd:1.4,magic:true,desc:"Легендарный. Карает врагов."},
 
-  // --- ТОПОРЫ ---
-  wood_axe:{name:"Топорик",emoji:"🪓",type:"weapon",chain:"axe",tier:1,size:[1,2],price:5,dmg:7,cd:3.0,next:"battle_axe",desc:"Медленно, но больно."},
-  battle_axe:{name:"Боевой топор",emoji:"🪓",type:"weapon",chain:"axe",tier:2,size:[2,2],price:13,dmg:12,cd:2.8,next:"great_axe",desc:"Тяжёлый удар."},
-  great_axe:{name:"Секира",emoji:"🪓",type:"weapon",chain:"axe",tier:3,size:[2,2],price:28,dmg:19,cd:2.6,next:"berserker_axe",desc:"Сокрушает врагов."},
-  berserker_axe:{name:"Топор берсерка",emoji:"🩸",type:"weapon",chain:"axe",tier:4,size:[2,3],price:52,dmg:28,cd:2.4,next:"god_axe",desc:"Растёт в ярости."},
-  god_axe:{name:"Топор богов",emoji:"⚡",type:"weapon",chain:"axe",tier:5,size:[2,3],price:105,dmg:42,cd:2.2,desc:"Легендарный. Разрушает всё."},
+  // ТОПОРЫ
+  wood_axe:{name:"Топорик",type:"weapon",chain:"axe",tier:1,size:[1,2],price:5,dmg:7,cd:3.0,next:"battle_axe",desc:"Медленно, но больно."},
+  battle_axe:{name:"Боевой топор",type:"weapon",chain:"axe",tier:2,size:[2,2],price:13,dmg:12,cd:2.8,next:"great_axe",desc:"Тяжёлый удар."},
+  great_axe:{name:"Секира",type:"weapon",chain:"axe",tier:3,size:[2,2],price:28,dmg:19,cd:2.6,next:"berserker_axe",desc:"Сокрушает врагов."},
+  berserker_axe:{name:"Топор берсерка",type:"weapon",chain:"axe",tier:4,size:[2,3],price:52,dmg:28,cd:2.4,next:"god_axe",desc:"Растёт в ярости."},
+  god_axe:{name:"Топор богов",type:"weapon",chain:"axe",tier:5,size:[2,3],price:105,dmg:42,cd:2.2,desc:"Легендарный. Разрушает всё."},
 
-  // --- БУЛАВЫ ---
-  mace:{name:"Булава",emoji:"🔨",type:"weapon",chain:"mace",tier:1,size:[1,2],price:5,dmg:6,cd:2.5,next:"war_mace",desc:"Дробит кости."},
-  war_mace:{name:"Боевая булава",emoji:"🔨",type:"weapon",chain:"mace",tier:2,size:[1,2],price:12,dmg:10,cd:2.3,stun:0.3,next:"steel_mace",desc:"Может оглушить."},
-  steel_mace:{name:"Стальная булава",emoji:"⚒️",type:"weapon",chain:"mace",tier:3,size:[2,2],price:24,dmg:16,cd:2.1,stun:0.5,next:"holy_mace",desc:"Оглушает надёжно."},
-  holy_mace:{name:"Святая булава",emoji:"✝️",type:"weapon",chain:"mace",tier:4,size:[2,2],price:46,dmg:22,cd:1.9,stun:0.7,next:"divine_mace",desc:"Бьёт святым светом."},
-  divine_mace:{name:"Булава божества",emoji:"☀️",type:"weapon",chain:"mace",tier:5,size:[2,3],price:95,dmg:32,cd:1.7,stun:1.0,desc:"Легендарная. Оглушает надолго."},
+  // БУЛАВЫ
+  mace:{name:"Булава",type:"weapon",chain:"mace",tier:1,size:[1,2],price:5,dmg:6,cd:2.5,next:"war_mace",desc:"Дробит кости."},
+  war_mace:{name:"Боевая булава",type:"weapon",chain:"mace",tier:2,size:[1,2],price:12,dmg:10,cd:2.3,stun:0.3,next:"steel_mace",desc:"Может оглушить."},
+  steel_mace:{name:"Стальная булава",type:"weapon",chain:"mace",tier:3,size:[2,2],price:24,dmg:16,cd:2.1,stun:0.5,next:"holy_mace",desc:"Оглушает надёжно."},
+  holy_mace:{name:"Святая булава",type:"weapon",chain:"mace",tier:4,size:[2,2],price:46,dmg:22,cd:1.9,stun:0.7,next:"divine_mace",desc:"Бьёт святым светом."},
+  divine_mace:{name:"Булава божества",type:"weapon",chain:"mace",tier:5,size:[2,3],price:95,dmg:32,cd:1.7,stun:1.0,desc:"Легендарная. Оглушает надолго."},
 
-  // --- ЛЁГКАЯ БРОНЯ ---
-  silk_robe:{name:"Шёлковая мантия",emoji:"🧥",type:"armor",chain:"light_armor",tier:1,size:[2,2],price:3,armor:1,hpBonus:5,next:"padded_robe",desc:"Лёгкая защита."},
-  padded_robe:{name:"Стёганая мантия",emoji:"🥋",type:"armor",chain:"light_armor",tier:2,size:[2,2],price:8,armor:3,hpBonus:12,next:"mage_robe",desc:"Мягкая, но крепкая."},
-  mage_robe:{name:"Мантия мага",emoji:"🧙",type:"armor",chain:"light_armor",tier:3,size:[2,2],price:18,armor:5,hpBonus:20,magicBonus:0.1,next:"archmage_robe",desc:"Усиливает магию."},
-  archmage_robe:{name:"Мантия архимага",emoji:"🔮",type:"armor",chain:"light_armor",tier:4,size:[2,3],price:38,armor:8,hpBonus:30,magicBonus:0.2,next:"divine_robe",desc:"Могущественная защита."},
-  divine_robe:{name:"Мантия божества",emoji:"✨",type:"armor",chain:"light_armor",tier:5,size:[3,3],price:85,armor:12,hpBonus:50,magicBonus:0.35,desc:"Легендарная. Вся магия +35%."},
+  // ЛЁГКАЯ БРОНЯ
+  silk_robe:{name:"Шёлковая мантия",type:"armor",chain:"light_armor",tier:1,size:[2,2],price:3,armor:1,hpBonus:5,next:"padded_robe",desc:"Лёгкая защита."},
+  padded_robe:{name:"Стёганая мантия",type:"armor",chain:"light_armor",tier:2,size:[2,2],price:8,armor:3,hpBonus:12,next:"mage_robe",desc:"Мягкая, но крепкая."},
+  mage_robe:{name:"Мантия мага",type:"armor",chain:"light_armor",tier:3,size:[2,2],price:18,armor:5,hpBonus:20,magicBonus:0.1,next:"archmage_robe",desc:"Усиливает магию."},
+  archmage_robe:{name:"Мантия архимага",type:"armor",chain:"light_armor",tier:4,size:[2,3],price:38,armor:8,hpBonus:30,magicBonus:0.2,next:"divine_robe",desc:"Могущественная защита."},
+  divine_robe:{name:"Мантия божества",type:"armor",chain:"light_armor",tier:5,size:[3,3],price:85,armor:12,hpBonus:50,magicBonus:0.35,desc:"Легендарная. Вся магия +35%."},
 
-  // --- ТЯЖЁЛАЯ БРОНЯ ---
-  leather_armor:{name:"Кожаная броня",emoji:"🥼",type:"armor",chain:"heavy_armor",tier:1,size:[2,2],price:4,armor:2,hpBonus:8,next:"chain_armor",desc:"Простая защита."},
-  chain_armor:{name:"Кольчуга",emoji:"🛡️",type:"armor",chain:"heavy_armor",tier:2,size:[2,2],price:10,armor:4,hpBonus:15,next:"scale_armor",desc:"Металлические кольца."},
-  scale_armor:{name:"Чешуйчатая броня",emoji:"🦎",type:"armor",chain:"heavy_armor",tier:3,size:[2,3],price:22,armor:7,hpBonus:25,next:"plate_armor",desc:"Прочная защита."},
-  plate_armor:{name:"Латная броня",emoji:"⚙️",type:"armor",chain:"heavy_armor",tier:4,size:[3,3],price:45,armor:11,hpBonus:40,next:"dragon_plate",desc:"Рыцарская защита."},
-  dragon_plate:{name:"Драконья броня",emoji:"🐉",type:"armor",chain:"heavy_armor",tier:5,size:[3,3],price:95,armor:16,hpBonus:60,thorn:4,desc:"Легендарная. Шипы врагу."},
+  // ТЯЖЁЛАЯ БРОНЯ
+  leather_armor:{name:"Кожаная броня",type:"armor",chain:"heavy_armor",tier:1,size:[2,2],price:4,armor:2,hpBonus:8,next:"chain_armor",desc:"Простая защита."},
+  chain_armor:{name:"Кольчуга",type:"armor",chain:"heavy_armor",tier:2,size:[2,2],price:10,armor:4,hpBonus:15,next:"scale_armor",desc:"Металлические кольца."},
+  scale_armor:{name:"Чешуйчатая броня",type:"armor",chain:"heavy_armor",tier:3,size:[2,3],price:22,armor:7,hpBonus:25,next:"plate_armor",desc:"Прочная защита."},
+  plate_armor:{name:"Латная броня",type:"armor",chain:"heavy_armor",tier:4,size:[3,3],price:45,armor:11,hpBonus:40,next:"dragon_plate",desc:"Рыцарская защита."},
+  dragon_plate:{name:"Драконья броня",type:"armor",chain:"heavy_armor",tier:5,size:[3,3],price:95,armor:16,hpBonus:60,thorn:4,desc:"Легендарная. Шипы врагу."},
 
-  // --- ЗЕЛЬЯ ---
-  small_potion:{name:"Малое зелье",emoji:"🧪",type:"potion",chain:"potion",tier:1,size:[1,1],price:3,heal:10,cd:4.0,next:"healing_potion",desc:"+10 HP раз в 4 сек."},
-  healing_potion:{name:"Зелье лечения",emoji:"⚗️",type:"potion",chain:"potion",tier:2,size:[1,1],price:8,heal:22,cd:4.5,next:"big_potion",desc:"+22 HP раз в 4.5 сек."},
-  big_potion:{name:"Большое зелье",emoji:"🍶",type:"potion",chain:"potion",tier:3,size:[1,2],price:18,heal:40,cd:5.0,next:"elixir",desc:"+40 HP раз в 5 сек."},
-  elixir:{name:"Эликсир жизни",emoji:"🏺",type:"potion",chain:"potion",tier:4,size:[1,2],price:38,heal:70,cd:5.5,next:"divine_elixir",desc:"+70 HP раз в 5.5 сек."},
-  divine_elixir:{name:"Эликсир богов",emoji:"🌟",type:"potion",chain:"potion",tier:5,size:[1,2],price:80,heal:120,cd:6.0,desc:"Легендарный. +120 HP."},
+  // ЗЕЛЬЯ
+  small_potion:{name:"Малое зелье",type:"potion",chain:"potion",tier:1,size:[1,1],price:3,heal:10,cd:4.0,next:"healing_potion",desc:"+10 HP раз в 4 сек."},
+  healing_potion:{name:"Зелье лечения",type:"potion",chain:"potion",tier:2,size:[1,1],price:8,heal:22,cd:4.5,next:"big_potion",desc:"+22 HP раз в 4.5 сек."},
+  big_potion:{name:"Большое зелье",type:"potion",chain:"potion",tier:3,size:[1,2],price:18,heal:40,cd:5.0,next:"elixir",desc:"+40 HP раз в 5 сек."},
+  elixir:{name:"Эликсир жизни",type:"potion",chain:"potion",tier:4,size:[1,2],price:38,heal:70,cd:5.5,next:"divine_elixir",desc:"+70 HP раз в 5.5 сек."},
+  divine_elixir:{name:"Эликсир богов",type:"potion",chain:"potion",tier:5,size:[1,2],price:80,heal:120,cd:6.0,desc:"Легендарный. +120 HP."},
 
-  // --- КОЛЬЦА ---
-  copper_ring:{name:"Медное кольцо",emoji:"💍",type:"ring",chain:"ring",tier:1,size:[1,1],price:4,atkBonus:1,next:"silver_ring",desc:"+1 к урону."},
-  silver_ring:{name:"Серебряное кольцо",emoji:"💍",type:"ring",chain:"ring",tier:2,size:[1,1],price:10,atkBonus:2,hpBonus:8,next:"gold_ring",desc:"+2 урона, +8 HP."},
-  gold_ring:{name:"Золотое кольцо",emoji:"💎",type:"ring",chain:"ring",tier:3,size:[1,1],price:22,atkBonus:4,hpBonus:15,crit:0.05,next:"platinum_ring",desc:"+4 урона, +5% крит."},
-  platinum_ring:{name:"Платиновое кольцо",emoji:"💠",type:"ring",chain:"ring",tier:4,size:[1,1],price:44,atkBonus:6,hpBonus:25,crit:0.1,next:"divine_ring",desc:"+6 урона, +10% крит."},
-  divine_ring:{name:"Кольцо богов",emoji:"👑",type:"ring",chain:"ring",tier:5,size:[1,1],price:90,atkBonus:10,hpBonus:40,crit:0.2,desc:"Легендарное. Всё сразу."}
+  // КОЛЬЦА
+  copper_ring:{name:"Медное кольцо",type:"ring",chain:"ring",tier:1,size:[1,1],price:4,atkBonus:1,next:"silver_ring",desc:"+1 к урону."},
+  silver_ring:{name:"Серебряное кольцо",type:"ring",chain:"ring",tier:2,size:[1,1],price:10,atkBonus:2,hpBonus:8,next:"gold_ring",desc:"+2 урона, +8 HP."},
+  gold_ring:{name:"Золотое кольцо",type:"ring",chain:"ring",tier:3,size:[1,1],price:22,atkBonus:4,hpBonus:15,crit:0.05,next:"platinum_ring",desc:"+4 урона, +5% крит."},
+  platinum_ring:{name:"Платиновое кольцо",type:"ring",chain:"ring",tier:4,size:[1,1],price:44,atkBonus:6,hpBonus:25,crit:0.1,next:"divine_ring",desc:"+6 урона, +10% крит."},
+  divine_ring:{name:"Кольцо богов",type:"ring",chain:"ring",tier:5,size:[1,1],price:90,atkBonus:10,hpBonus:40,crit:0.2,desc:"Легендарное. Всё сразу."}
 };
+
+// Иконки предгенерируем
+const ITEM_ICONS = {};
+Object.entries(ITEMS).forEach(([k,it])=>{
+  ITEM_ICONS[k] = makeItemIcon(it.chain, it.tier);
+});
 
 // ============================================================
 // СОСТОЯНИЕ
@@ -711,7 +801,7 @@ let state = {
   playerId:null, name:"", charKey:"knight",
   hp:100, maxHp:100, baseHp:100,
   gold:10, round:1, wins:0, losses:0,
-  backpack:[], shop:[], shopLocked:false
+  backpack:[], shop:[]
 };
 let playerRef = null;
 let uidCounter = 0;
@@ -742,18 +832,17 @@ function notify(text,type="info",dur=3000){
 function renderCharacters(){
   const grid = $("charGrid");
   grid.innerHTML = "";
-  const seed = () => "?seed="+Math.random().toString(36).slice(2,8);
   Object.entries(CHARACTERS).forEach(([key,c])=>{
     const el = document.createElement("div");
     el.className = "char-card";
     el.style.setProperty("--acc",c.color);
     el.dataset.key = key;
     el.innerHTML = `
-      <div style="font-size:52px;line-height:1;margin-bottom:8px;filter:drop-shadow(0 0 20px ${c.color}66);">${c.emoji}</div>
+      <img class="portrait" src="${PORTRAITS[key]}" alt="${c.name}">
       <h4>${c.name}</h4>
       <p>${c.desc}</p>
       <div class="stats-mini">
-        <span style="color:var(--green2)">❤️</span><span>${c.hp}</span>
+        <span style="color:var(--green2)">HP</span><span>${c.hp}</span>
         <span style="color:var(--gold2)">💰</span><span>${c.gold}</span>
       </div>
     `;
@@ -764,7 +853,6 @@ function renderCharacters(){
     };
     grid.appendChild(el);
   });
-  // Автовыбор первого
   const first = grid.querySelector(".char-card");
   if(first) first.click();
 }
@@ -786,11 +874,7 @@ $("enterBtn").onclick = async ()=>{
   state.losses = 0;
   state.backpack = [];
 
-  // Стартовые предметы
-  ch.startItems.forEach(it=>{
-    addItem(it.itemKey, it.x, it.y);
-  });
-
+  ch.startItems.forEach(it=>{ addItem(it.itemKey, it.x, it.y); });
   generateShop();
 
   playerRef = db.ref("players/"+state.playerId);
@@ -839,8 +923,9 @@ function canPlace(itemKey,x,y,ignoreUid){
   }
   return true;
 }
+const GW=6, GH=5;
+const CELL=62, GAP=5, PAD=12;
 
-// Найти предмет под позицией (для merge)
 function findItemAt(x,y,ignoreUid){
   for(const p of state.backpack){
     if(p.uid===ignoreUid) continue;
@@ -856,7 +941,6 @@ function renderBackpack(){
   grid.innerHTML = "";
   grid.style.position = "relative";
 
-  // Ячейки
   for(let y=0;y<GH;y++){
     for(let x=0;x<GW;x++){
       const c = document.createElement("div");
@@ -866,7 +950,6 @@ function renderBackpack(){
     }
   }
 
-  // Предметы
   state.backpack.forEach(p=>{
     const it = ITEMS[p.itemKey];
     const [w,h] = it.size;
@@ -874,13 +957,16 @@ function renderBackpack(){
     el.className = "item";
     el.dataset.uid = p.uid;
     el.dataset.rar = it.tier;
-    el.dataset.tier = it.tier;
+    el.dataset.tier = "T"+it.tier;
     el.style.left = (PAD + p.x*(CELL+GAP)) + "px";
     el.style.top  = (PAD + p.y*(CELL+GAP)) + "px";
     el.style.width = (w*CELL + (w-1)*GAP) + "px";
     el.style.height = (h*CELL + (h-1)*GAP) + "px";
-    el.textContent = it.emoji;
     el.title = it.name;
+    const img = document.createElement("img");
+    img.src = ITEM_ICONS[p.itemKey];
+    img.alt = it.name;
+    el.appendChild(img);
 
     el.addEventListener("mouseenter",()=>showItemInfo(p.itemKey));
     el.addEventListener("mouseleave",hideItemInfo);
@@ -892,28 +978,34 @@ function renderBackpack(){
 
 function showItemInfo(key){
   const it = ITEMS[key];
-  const rar = RARITY_COLORS[it.tier-1];
+  const rar = ["#9ca3af","#4ade80","#60a5fa","#a78bfa","#ffc857"][it.tier-1];
   const rarNames = ["Обычный","Необычный","Редкий","Эпический","Легендарный"];
   const stats = [];
-  if(it.dmg) stats.push(`⚔️ Урон: ${it.dmg}`);
-  if(it.cd) stats.push(`⏱️ Кулдаун: ${it.cd}с`);
-  if(it.armor) stats.push(`🛡️ Броня: ${it.armor}`);
-  if(it.hpBonus) stats.push(`❤️ +${it.hpBonus} HP`);
-  if(it.heal) stats.push(`💚 Лечение: +${it.heal}`);
-  if(it.atkBonus) stats.push(`💪 +${it.atkBonus} к урону`);
-  if(it.crit) stats.push(`💥 Крит: +${Math.round(it.crit*100)}%`);
-  if(it.lifesteal) stats.push(`🩸 Вампиризм: ${Math.round(it.lifesteal*100)}%`);
-  if(it.thorn) stats.push(`🌵 Шипы: ${it.thorn}`);
-  if(it.stun) stats.push(`💫 Оглушение: ${it.stun}с`);
-  if(it.magicBonus) stats.push(`✨ Магия: +${Math.round(it.magicBonus*100)}%`);
-  if(it.magic) stats.push(`🔮 Игнорирует броню`);
+  if(it.dmg) stats.push(`Урон: ${it.dmg}`);
+  if(it.cd) stats.push(`Кулдаун: ${it.cd}с`);
+  if(it.armor) stats.push(`Броня: ${it.armor}`);
+  if(it.hpBonus) stats.push(`+${it.hpBonus} HP`);
+  if(it.heal) stats.push(`Лечение: +${it.heal}`);
+  if(it.atkBonus) stats.push(`+${it.atkBonus} к урону`);
+  if(it.crit) stats.push(`Крит: +${Math.round(it.crit*100)}%`);
+  if(it.lifesteal) stats.push(`Вампиризм: ${Math.round(it.lifesteal*100)}%`);
+  if(it.thorn) stats.push(`Шипы: ${it.thorn}`);
+  if(it.stun) stats.push(`Оглушение: ${it.stun}с`);
+  if(it.magicBonus) stats.push(`Магия: +${Math.round(it.magicBonus*100)}%`);
+  if(it.magic) stats.push(`Игнорирует броню`);
 
   const mergeInfo = it.next
     ? `<div class="ii-merge">⚡ Соедините с другим «${it.name}» — получите <b>${ITEMS[it.next].name}</b></div>`
     : `<div class="ii-merge" style="opacity:0.5;">🌟 Максимальный уровень</div>`;
 
   $("itemInfo").innerHTML = `
-    <div class="ii-name" style="color:${rar}">${it.emoji} ${it.name} <span style="font-size:10px;opacity:0.7;font-family:Inter;">T${it.tier} · ${rarNames[it.tier-1]}</span></div>
+    <div class="ii-head">
+      <img src="${ITEM_ICONS[key]}" alt="">
+      <div>
+        <div class="ii-name" style="color:${rar}">${it.name}</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:2px;">T${it.tier} · ${rarNames[it.tier-1]}</div>
+      </div>
+    </div>
     <div class="ii-desc">${it.desc}</div>
     <div class="ii-stats">${stats.join("<br>")}</div>
     ${mergeInfo}
@@ -925,7 +1017,7 @@ function hideItemInfo(){
 }
 
 // ============================================================
-// DRAG & DROP + MERGE
+// DRAG & DROP
 // ============================================================
 function startDrag(e, placed){
   if(e.button !== 0) return;
@@ -940,7 +1032,6 @@ function startDrag(e, placed){
     offY: e.clientY - rect.top
   };
 
-  // Ghost
   const ghost = el.cloneNode(true);
   ghost.id = "dragGhost";
   ghost.style.position = "fixed";
@@ -955,7 +1046,6 @@ function startDrag(e, placed){
   document.body.appendChild(ghost);
 
   el.classList.add("dragging");
-
   document.addEventListener("mousemove", onDragMove);
   document.addEventListener("mouseup", onDragEnd);
 }
@@ -967,20 +1057,15 @@ function onDragMove(e){
   ghost.style.left = (e.clientX - dragCtx.offX)+"px";
   ghost.style.top = (e.clientY - dragCtx.offY)+"px";
 
-  // Подсветка ячеек под ghost
   const grid = $("backpack");
   const gRect = grid.getBoundingClientRect();
-  const relX = e.clientX - gRect.left - dragCtx.offX - PAD + gRect.left - grid.offsetLeft;
-  // проще: вычисляем целевую ячейку
   const cellX = Math.round((e.clientX - gRect.left - dragCtx.offX - PAD) / (CELL+GAP));
   const cellY = Math.round((e.clientY - gRect.top - dragCtx.offY - PAD) / (CELL+GAP));
 
   document.querySelectorAll(".bp-cell").forEach(c=>c.classList.remove("hl-ok","hl-merge"));
 
   const target = findItemAt(cellX, cellY, dragCtx.placed.uid);
-  const isMerge = target
-    && target.itemKey === dragCtx.placed.itemKey
-    && ITEMS[target.itemKey].next;
+  const isMerge = target && target.itemKey === dragCtx.placed.itemKey && ITEMS[target.itemKey].next;
 
   if(isMerge){
     const it = ITEMS[target.itemKey];
@@ -1018,16 +1103,11 @@ function onDragEnd(e){
   const placed = dragCtx.placed;
   const target = findItemAt(cellX, cellY, placed.uid);
 
-  // ====== MERGE ======
-  const canMerge = target
-    && target.itemKey === placed.itemKey
-    && ITEMS[target.itemKey].next;
+  const canMerge = target && target.itemKey === placed.itemKey && ITEMS[target.itemKey].next;
 
   if(canMerge){
     const nextKey = ITEMS[target.itemKey].next;
     const nextItem = ITEMS[nextKey];
-    // Пробуем поставить next на место target
-    // Сначала убираем оба
     const keepX = target.x, keepY = target.y;
     state.backpack = state.backpack.filter(p=>p.uid!==placed.uid && p.uid!==target.uid);
 
@@ -1036,13 +1116,11 @@ function onDragEnd(e){
       notify(`⚡ Объединено: ${nextItem.name}!`,"gold",2500);
       spawnMergeFx(keepX, keepY, nextItem.tier);
     } else {
-      // Ищем свободное место
       const spot = findFreeSpot(nextKey);
       if(spot){
         state.backpack.push({itemKey:nextKey,x:spot.x,y:spot.y,uid:++uidCounter});
         notify(`⚡ Объединено: ${nextItem.name}!`,"gold",2500);
       } else {
-        // Не помещается — возвращаем как было
         state.backpack.push({itemKey:target.itemKey,x:target.x,y:target.y,uid:++uidCounter});
         state.backpack.push({itemKey:placed.itemKey,x:placed.x,y:placed.y,uid:++uidCounter});
         notify("Нет места для объединения!","error");
@@ -1054,11 +1132,9 @@ function onDragEnd(e){
     return;
   }
 
-  // ====== ОБЫЧНОЕ ПЕРЕМЕЩЕНИЕ ======
   if(canPlace(placed.itemKey, cellX, cellY, placed.uid)){
     placed.x = cellX; placed.y = cellY;
   } else {
-    // Ищем ближайшую свободную
     let found = false;
     for(let r=1;r<=2 && !found;r++){
       for(let dy=-r;dy<=r && !found;dy++){
@@ -1096,7 +1172,7 @@ function spawnMergeFx(gx,gy,tier){
     top:${rect.top + PAD + gy*(CELL+GAP)}px;
     font-size:40px;pointer-events:none;z-index:9998;
     animation:floatUp 1.2s forwards;
-    filter:drop-shadow(0 0 20px ${RARITY_COLORS[tier-1]});
+    filter:drop-shadow(0 0 20px ${["#9ca3af","#4ade80","#60a5fa","#a78bfa","#ffc857"][tier-1]});
   `;
   fx.textContent = "✨";
   document.body.appendChild(fx);
@@ -1110,7 +1186,6 @@ function findFreeSpot(itemKey){
   return null;
 }
 
-// ПКМ = продать
 document.addEventListener("contextmenu",(e)=>{
   const card = e.target.closest(".item");
   if(!card) return;
@@ -1155,14 +1230,14 @@ function renderShop(){
   box.innerHTML = "";
   state.shop.forEach((key,idx)=>{
     const it = ITEMS[key];
-    const rar = RARITY_COLORS[it.tier-1];
+    const rar = ["#9ca3af","#4ade80","#60a5fa","#a78bfa","#ffc857"][it.tier-1];
     const canAfford = state.gold >= it.price;
     const el = document.createElement("div");
     el.className = "shop-item" + (canAfford?"":" disabled");
     el.style.setProperty("--r",rar);
     el.innerHTML = `
       <div class="si-icon">
-        ${it.emoji}
+        <img src="${ITEM_ICONS[key]}" alt="">
         <span class="si-tier">T${it.tier}</span>
       </div>
       <div class="si-info">
@@ -1212,16 +1287,15 @@ function updateHUD(){
 $("battleBtn").onclick = startBattle;
 
 function buildFighter(name, backpack, baseHp, isMe, charKey){
-  const ch = CHARACTERS[charKey] || CHARACTERS.knight;
   const f = {
-    name, hp:baseHp, maxHp:baseHp,
-    baseHp, armor:0, atkBonus:0, hpBonus:0,
-    critChance:0, lifesteal:0, thorn:0, stunOnHit:0,
+    name, hp:baseHp, maxHp:baseHp, baseHp,
+    armor:0, atkBonus:0, hpBonus:0,
+    critChance:0, lifesteal:0, thorn:0,
     magicBonus:0, weapons:[], potions:[],
-    emoji: ch.emoji, color: ch.color, isMe
+    portrait: PORTRAITS[charKey] || PORTRAITS.knight,
+    charKey: charKey, color: (CHARACTERS[charKey]||CHARACTERS.knight).color, isMe
   };
 
-  // Сначала считаем бонусы от не-оружия
   for(const p of backpack){
     const it = ITEMS[p.itemKey];
     if(!it) continue;
@@ -1234,24 +1308,16 @@ function buildFighter(name, backpack, baseHp, isMe, charKey){
     if(it.magicBonus) f.magicBonus += it.magicBonus;
   }
 
-  // Теперь оружие и зелья с учётом бонусов
   for(const p of backpack){
     const it = ITEMS[p.itemKey];
     if(!it) continue;
     if(it.type==="weapon"){
       let dmg = it.dmg + f.atkBonus;
       if(it.magic) dmg = Math.floor(dmg * (1 + f.magicBonus));
-      f.weapons.push({
-        name:it.name, emoji:it.emoji,
-        dmg, cd:it.cd, timer:it.cd,
-        magic:!!it.magic, stun:it.stun||0
-      });
+      f.weapons.push({name:it.name,dmg,cd:it.cd,timer:it.cd,magic:!!it.magic,icon:ITEM_ICONS[p.itemKey]});
     }
     if(it.type==="potion" && it.heal){
-      f.potions.push({
-        name:it.name, emoji:it.emoji,
-        heal:it.heal, cd:it.cd, timer:it.cd
-      });
+      f.potions.push({name:it.name,heal:it.heal,cd:it.cd,timer:it.cd,icon:ITEM_ICONS[p.itemKey]});
     }
   }
 
@@ -1274,7 +1340,6 @@ function startBattle(){
   if(opp && opp.backpack && opp.backpack.length){
     enemy = buildFighter(opp.name, opp.backpack, opp.maxHp||100, false, opp.charKey||"knight");
   } else {
-    // Бот
     const botBp = generateBotBackpack(state.round);
     enemy = buildFighter("Противник", botBp, 80 + state.round*10, false, "knight");
   }
@@ -1303,12 +1368,11 @@ function runBattle(me, enemy){
   $("battleCloseBtn").disabled = true;
   $("battleSub").textContent = `Раунд ${state.round}`;
   $("battleLog").innerHTML = "";
-  $("battleTitle").textContent = "⚔️ БОЙ";
 
   renderFighters(me, enemy);
-  addLog(log, "info", "⚔️ Бой начался!");
-  if(me.weapons.length===0) addLog(log, "lose", "⚠️ У вас нет оружия!");
-  if(enemy.weapons.length===0) addLog(log, "info", "У врага нет оружия!");
+  addLogLine(log, "info", "⚔️ Бой начался!");
+  if(me.weapons.length===0) addLogLine(log, "lose", "⚠️ У вас нет оружия!");
+  if(enemy.weapons.length===0) addLogLine(log, "info", "У врага нет оружия!");
 
   let t = 0;
   const dt = 0.08;
@@ -1317,14 +1381,13 @@ function runBattle(me, enemy){
   const timer = setInterval(()=>{
     t += dt;
 
-    // Зелья
     for(const p of me.potions){
       p.timer -= dt;
       if(p.timer<=0){
         const before = me.hp;
         me.hp = Math.min(me.maxHp, me.hp + p.heal);
         const diff = Math.floor(me.hp - before);
-        if(diff>0) addLog(log, "heal", `${me.name}: ${p.emoji} +${diff} HP`);
+        if(diff>0) addLogLine(log, "heal", `${me.name}: ${p.name} +${diff} HP`);
         p.timer = p.cd;
       }
     }
@@ -1334,12 +1397,11 @@ function runBattle(me, enemy){
         const before = enemy.hp;
         enemy.hp = Math.min(enemy.maxHp, enemy.hp + p.heal);
         const diff = Math.floor(enemy.hp - before);
-        if(diff>0) addLog(log, "heal", `${enemy.name}: ${p.emoji} +${diff} HP`);
+        if(diff>0) addLogLine(log, "heal", `${enemy.name}: ${p.name} +${diff} HP`);
         p.timer = p.cd;
       }
     }
 
-    // Атаки игрока
     for(const w of me.weapons){
       w.timer -= dt;
       if(w.timer<=0){
@@ -1347,20 +1409,17 @@ function runBattle(me, enemy){
         const crit = Math.random() < me.critChance;
         if(crit) dmg = Math.floor(dmg*2);
         enemy.hp -= dmg;
-        addLog(log, "dmg", `${me.name}: ${w.emoji} ${w.name} → ${dmg}${crit?" (КРИТ!)":""}`);
+        addLogLine(log, "dmg", `${me.name}: ${w.name} → ${dmg}${crit?" (КРИТ!)":""}`);
         spawnDmgNumber("fighterEnemy", dmg, crit);
-
         const ls = me.lifesteal;
         if(ls>0){
           const heal = Math.floor(dmg*ls);
-          if(heal>0){ me.hp = Math.min(me.maxHp, me.hp+heal); addLog(log, "heal", `${me.name}: 🩸 +${heal} HP`); }
+          if(heal>0){ me.hp = Math.min(me.maxHp, me.hp+heal); addLogLine(log, "heal", `${me.name}: Вампиризм +${heal} HP`); }
         }
-        if(enemy.thorn>0){ me.hp -= enemy.thorn; addLog(log, "dmg", `${me.name}: 🌵 Шипы -${enemy.thorn}`); }
-
+        if(enemy.thorn>0){ me.hp -= enemy.thorn; addLogLine(log, "dmg", `${me.name}: Шипы -${enemy.thorn}`); }
         w.timer = w.cd;
       }
     }
-    // Атаки врага
     for(const w of enemy.weapons){
       w.timer -= dt;
       if(w.timer<=0){
@@ -1368,17 +1427,15 @@ function runBattle(me, enemy){
         const crit = Math.random() < enemy.critChance;
         if(crit) dmg = Math.floor(dmg*2);
         me.hp -= dmg;
-        addLog(log, "dmg", `${enemy.name}: ${w.emoji} ${w.name} → ${dmg}${crit?" (КРИТ!)":""}`);
+        addLogLine(log, "dmg", `${enemy.name}: ${w.name} → ${dmg}${crit?" (КРИТ!)":""}`);
         spawnDmgNumber("fighterMe", dmg, crit);
         shakeEl("fighterMe");
-
         const ls = enemy.lifesteal;
         if(ls>0){
           const heal = Math.floor(dmg*ls);
-          if(heal>0){ enemy.hp = Math.min(enemy.maxHp, enemy.hp+heal); addLog(log, "heal", `${enemy.name}: 🩸 +${heal} HP`); }
+          if(heal>0){ enemy.hp = Math.min(enemy.maxHp, enemy.hp+heal); addLogLine(log, "heal", `${enemy.name}: Вампиризм +${heal} HP`); }
         }
-        if(me.thorn>0){ enemy.hp -= me.thorn; addLog(log, "dmg", `${enemy.name}: 🌵 Шипы -${me.thorn}`); }
-
+        if(me.thorn>0){ enemy.hp -= me.thorn; addLogLine(log, "dmg", `${enemy.name}: Шипы -${me.thorn}`); }
         w.timer = w.cd;
       }
     }
@@ -1391,13 +1448,13 @@ function runBattle(me, enemy){
       enemy.hp = Math.max(0, enemy.hp);
 
       let result;
-      if(me.hp>0 && enemy.hp<=0){ result="win"; addLog(log,"win","🏆 ПОБЕДА!"); }
-      else if(me.hp<=0 && enemy.hp>0){ result="lose"; addLog(log,"lose","💀 ПОРАЖЕНИЕ"); }
-      else if(me.hp<=0 && enemy.hp<=0){ result="win"; addLog(log,"win","🤝 ДВОЙНОЙ НОКАУТ — победа!"); }
+      if(me.hp>0 && enemy.hp<=0){ result="win"; addLogLine(log,"win","🏆 ПОБЕДА!"); }
+      else if(me.hp<=0 && enemy.hp>0){ result="lose"; addLogLine(log,"lose","💀 ПОРАЖЕНИЕ"); }
+      else if(me.hp<=0 && enemy.hp<=0){ result="win"; addLogLine(log,"win","🤝 ДВОЙНОЙ НОКАУТ — победа!"); }
       else {
         const mp = me.hp/me.maxHp, ep = enemy.hp/enemy.maxHp;
-        if(mp>=ep){ result="win"; addLog(log,"win","⏱️ Время! Победа по HP"); }
-        else { result="lose"; addLog(log,"lose","⏱️ Время! Поражение по HP"); }
+        if(mp>=ep){ result="win"; addLogLine(log,"win","⏱️ Время! Победа по HP"); }
+        else { result="lose"; addLogLine(log,"lose","⏱️ Время! Поражение по HP"); }
       }
 
       renderFighters(me, enemy);
@@ -1406,14 +1463,13 @@ function runBattle(me, enemy){
         state.wins++;
         const reward = 6 + state.round*2;
         state.gold += reward;
-        addLog(log,"eff",`💰 Награда: +${reward} золота`);
+        addLogLine(log,"eff",`💰 Награда: +${reward} золота`);
         notify(`Победа! +${reward}💰`,"success");
       } else {
         state.losses++;
         notify("Поражение... но ты выжил","error");
       }
 
-      // Регенерация + новый раунд
       state.round++;
       state.baseHp += 6;
       state.maxHp = state.baseHp;
@@ -1455,12 +1511,13 @@ function shakeEl(id){
 function renderFighters(me, enemy){
   const renderF = (f)=>{
     const pct = Math.max(0, f.hp/f.maxHp*100);
+    const ch = CHARACTERS[f.charKey] || CHARACTERS.knight;
     return `
       <div class="fighter-head">
-        <div style="font-size:36px;width:52px;height:52px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3);border-radius:12px;border:2px solid ${f.color};">${f.emoji}</div>
+        <img class="portrait" src="${f.portrait}" alt="">
         <div>
           <div class="fighter-name">${escapeHtml(f.name)}</div>
-          <div class="fighter-role">${CHARACTERS[Object.keys(CHARACTERS).find(k=>CHARACTERS[k].emoji===f.emoji)]?.name||"Боец"}</div>
+          <div class="fighter-role">${ch.name}</div>
         </div>
       </div>
       <div class="hp-bar ${f.isMe?'':'enemy'}">
@@ -1474,7 +1531,7 @@ function renderFighters(me, enemy){
         <div class="stat-pill"><span>🩸</span><span>${Math.round(f.lifesteal*100)}%</span></div>
       </div>
       <div style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6;font-family:'Consolas',monospace;">
-        ${f.weapons.map(w=>`${w.emoji} ${w.dmg}⚔️ / ${w.cd.toFixed(1)}с`).join("<br>") || "нет оружия"}
+        ${f.weapons.map(w=>`${w.name} ${w.dmg}⚔️ / ${w.cd.toFixed(1)}с`).join("<br>") || "нет оружия"}
       </div>
     `;
   };
@@ -1482,7 +1539,7 @@ function renderFighters(me, enemy){
   $("fighterEnemy").innerHTML = renderF(enemy);
 }
 
-function addLog(log, cls, text){
+function addLogLine(log, cls, text){
   log.push({cls, text});
   const box = $("battleLog");
   const line = document.createElement("div");
@@ -1522,20 +1579,19 @@ function listenOpponents(){
     const arr = Object.entries(data).filter(([id])=>id!==state.playerId);
 
     if(arr.length===0){
-      box.innerHTML = `<div style="color:var(--dim);text-align:center;padding:20px;font-size:12px;">
-        Пока никого нет.<br>Сражайся с ботами!
-      </div>`;
+      box.innerHTML = `<div style="color:var(--dim);text-align:center;padding:20px;font-size:12px;">Пока никого нет.<br>Сражайся с ботами!</div>`;
     } else {
       box.innerHTML = arr.map(([id,p])=>{
         const ch = CHARACTERS[p.charKey] || CHARACTERS.knight;
+        const key = p.charKey || "knight";
         return `
           <div class="player-row">
-            <div class="pr-avatar" style="display:flex;align-items:center;justify-content:center;font-size:20px;border:1px solid ${ch.color};">${ch.emoji}</div>
+            <div class="pr-avatar"><img src="${PORTRAITS[key]}" alt=""></div>
             <div style="flex:1;min-width:0;">
               <div class="pr-name">${escapeHtml(p.name)}</div>
               <div class="pr-sub">${ch.name} · раунд ${p.round||1}</div>
             </div>
-            <div class="pr-hp">${p.hp||100}❤️</div>
+            <div class="pr-hp">${p.hp||100} HP</div>
           </div>
         `;
       }).join("");
