@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text RPG Online</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- Экран входа -->
+  <div id="loginScreen" class="screen active">
+    <div class="login-box">
+      <h1>⚔️ Text RPG Online</h1>
+      <p>Введи своё имя, странник:</p>
+      <input type="text" id="playerName" maxlength="16" placeholder="Имя героя...">
+      <div class="char-select" id="charSelect"></div>
+      <button id="enterBtn">Войти в мир</button>
+      <div id="onlinePlayers"></div>
+    </div>
+  </div>
+
+  <!-- Игровой экран -->
+  <div id="gameScreen" class="screen">
+    <div class="header">
+      <div class="player-info">
+        <span id="hudName">—</span>
+        <span id="hudClass">—</span>
+      </div>
+      <div class="stats">
+        <span>❤️ <b id="hudHp">0</b>/<span id="hudMaxHp">0</span></span>
+        <span>⚔️ <b id="hudAtk">0</b></span>
+        <span>🛡️ <b id="hudDef">0</b></span>
+        <span>💰 <b id="hudGold">0</b></span>
+        <span>⭐ <b id="hudXp">0</b></span>
+      </div>
+    </div>
+
+    <div class="main-area">
+      <div class="log-panel">
+        <div id="log"></div>
+        <div class="input-row">
+          <input type="text" id="actionInput" placeholder="Что ты делаешь? (например: атакую гоблина мечом)">
+          <button id="actionBtn">Действовать</button>
+        </div>
+      </div>
+
+      <div class="side-panel">
+        <div class="tabs">
+          <button class="tab active" data-tab="inv">🎒 Инвентарь</button>
+          <button class="tab" data-tab="quests">📜 Квесты</button>
+          <button class="tab" data-tab="players">👥 Игроки</button>
+        </div>
+        <div id="invTab" class="tab-content active"></div>
+        <div id="questsTab" class="tab-content"></div>
+        <div id="playersTab" class="tab-content"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
