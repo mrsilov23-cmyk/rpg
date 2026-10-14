@@ -1,8 +1,0 @@
-{
-  "passed": true,
-  "contexts": 5,
-  "pageErrors": [],
-  "firebaseRequests": 0,
-  "commands": 31,
-  "mode": "local mock adapter, NOT Firebase emulator"
-}
