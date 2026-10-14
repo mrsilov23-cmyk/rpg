@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "expressionsAudited": 92,
+  "slotAndMatchConfigurations": 6,
+  "checks": [
+    "supported method allowlist",
+    "JavaScript expression parsing",
+    "four-slot key range",
+    "2/3/4 players match shapes",
+    "scores completeness including sparse slots",
+    "two-value HP shape",
+    "bounded backpack/event keys",
+    "closed root and owner guards"
+  ],
+  "scope": "Local expression/static checks only; NOT Firebase compiler or emulator"
+}

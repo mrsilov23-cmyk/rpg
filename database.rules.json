@@ -1,0 +1,276 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "backpack_spark_v4": {
+      ".read": false,
+      ".write": false,
+      "rooms": {
+        "$room": {
+          ".read": "auth != null && $room.matches(/^[a-f0-9]{32}$/) && data.child('meta/expiresAt').val() > now",
+          ".write": "auth != null && ((!data.exists() && $room.matches(/^[a-f0-9]{32}$/) && newData.child('meta/owner').val() === auth.uid && newData.child('members/0').exists() && !newData.child('members/1').exists() && !newData.child('members/2').exists() && !newData.child('members/3').exists() && newData.child('members/0/uid').val() === auth.uid) || (!newData.exists() && data.child('meta/owner').val() === auth.uid))",
+          ".validate": "newData.hasChildren(['meta','members'])",
+          "meta": {
+            ".write": "auth != null && data.child('owner').val() === auth.uid && data.child('expiresAt').val() > now",
+            ".validate": "newData.hasChildren(['owner','phase','round','seed','version','createdAt','expiresAt']) && ((!data.exists() && newData.child('owner').val() === auth.uid && newData.child('phase').val() === 'preparing' && newData.child('round').val() === 1 && newData.child('seed').val() === 0 && !newData.child('result').exists()) || (data.exists() && newData.child('owner').val() === data.child('owner').val() && newData.child('version').val() === data.child('version').val() && newData.child('createdAt').val() === data.child('createdAt').val() && newData.child('expiresAt').val() === data.child('expiresAt').val() && ((data.child('phase').val() !== 'closed' && newData.child('phase').val() === 'closed' && newData.child('round').val() === data.child('round').val() && newData.child('seed').val() === data.child('seed').val() && !newData.child('result').exists()) || (data.child('phase').val() === 'preparing' && newData.child('phase').val() === 'battle' && newData.child('round').val() === data.child('round').val() && !newData.child('result').exists() && ((newData.parent().child('members').child('0').exists() ? 1 : 0) + (newData.parent().child('members').child('1').exists() ? 1 : 0) + (newData.parent().child('members').child('2').exists() ? 1 : 0) + (newData.parent().child('members').child('3').exists() ? 1 : 0)) >= 2 && (!newData.parent().child('members').child('0').exists() || (newData.parent().child('members').child('0/left').val() === false && newData.parent().child('members').child('0/ready').val() === true && newData.parent().child('members').child('0/readyRound').val() === data.child('round').val())) && (!newData.parent().child('members').child('1').exists() || (newData.parent().child('members').child('1/left').val() === false && newData.parent().child('members').child('1/ready').val() === true && newData.parent().child('members').child('1/readyRound').val() === data.child('round').val())) && (!newData.parent().child('members').child('2').exists() || (newData.parent().child('members').child('2/left').val() === false && newData.parent().child('members').child('2/ready').val() === true && newData.parent().child('members').child('2/readyRound').val() === data.child('round').val())) && (!newData.parent().child('members').child('3').exists() || (newData.parent().child('members').child('3/left').val() === false && newData.parent().child('members').child('3/ready').val() === true && newData.parent().child('members').child('3/readyRound').val() === data.child('round').val()))) || (data.child('phase').val() === 'battle' && newData.child('phase').val() === 'result' && !data.child('result').exists() && newData.child('result').exists() && newData.child('round').val() === data.child('round').val() && newData.child('seed').val() === data.child('seed').val()) || (data.child('phase').val() === 'result' && newData.child('phase').val() === 'preparing' && newData.child('round').val() === data.child('round').val()+1 && newData.child('seed').val() === 0 && !newData.child('result').exists() && (!newData.parent().child('members').child('0').exists() || newData.parent().child('members').child('0/left').val() === true || newData.parent().child('members').child('0/ack').val() === data.child('round').val()) && (!newData.parent().child('members').child('1').exists() || newData.parent().child('members').child('1/left').val() === true || newData.parent().child('members').child('1/ack').val() === data.child('round').val()) && (!newData.parent().child('members').child('2').exists() || newData.parent().child('members').child('2/left').val() === true || newData.parent().child('members').child('2/ack').val() === data.child('round').val()) && (!newData.parent().child('members').child('3').exists() || newData.parent().child('members').child('3/left').val() === true || newData.parent().child('members').child('3/ack').val() === data.child('round').val())))))",
+            "owner": {
+              ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 128"
+            },
+            "phase": {
+              ".validate": "(newData.val() === \"preparing\" || newData.val() === \"battle\" || newData.val() === \"result\" || newData.val() === \"closed\")"
+            },
+            "round": {
+              ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 1000000)"
+            },
+            "seed": {
+              ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 4294967295)"
+            },
+            "version": {
+              ".validate": "newData.val() === 'v3.0.0'"
+            },
+            "createdAt": {
+              ".validate": "newData.isNumber() && (data.exists() || (newData.val() <= now+60000 && newData.val() >= now-60000))"
+            },
+            "expiresAt": {
+              ".validate": "newData.isNumber() && (data.exists() || (newData.val() > now && newData.val() <= now+86460000))"
+            },
+            "$extra": {
+              ".validate": "false"
+            },
+            "result": {
+              ".validate": "newData.hasChildren(['version','round','seed','matches','scores']) && newData.child('round').val() === newData.parent().child('round').val() && newData.child('seed').val() === newData.parent().child('seed').val()",
+              "version": {
+                ".validate": "newData.val() === 'v3.0.0'"
+              },
+              "round": {
+                ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 1000000)"
+              },
+              "seed": {
+                ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 4294967295)"
+              },
+              "matches": {
+                ".validate": "(((newData.parent().parent().parent().child('members').child('0').exists() ? 1 : 0) + (newData.parent().parent().parent().child('members').child('1').exists() ? 1 : 0) + (newData.parent().parent().parent().child('members').child('2').exists() ? 1 : 0) + (newData.parent().parent().parent().child('members').child('3').exists() ? 1 : 0)) === 3 ? newData.hasChildren(['0','1','2']) : (((newData.parent().parent().parent().child('members').child('0').exists() ? 1 : 0) + (newData.parent().parent().parent().child('members').child('1').exists() ? 1 : 0) + (newData.parent().parent().parent().child('members').child('2').exists() ? 1 : 0) + (newData.parent().parent().parent().child('members').child('3').exists() ? 1 : 0)) === 4 ? (newData.hasChildren(['0','1']) && !newData.child('2').exists()) : (newData.hasChild('0') && !newData.child('1').exists() && !newData.child('2').exists())))",
+                "$match": {
+                  ".validate": "$match.matches(/^[0-2]$/) && newData.hasChildren(['pair','seed','winner','duration','hp','maxHp'])",
+                  "pair": {
+                    ".validate": "newData.hasChildren(['0','1']) && newData.child('0').val() !== newData.child('1').val()",
+                    "0": {
+                      ".validate": "newData.isString() && (root.child('backpack_spark_v4/rooms').child($room).child('members').child('0/uid').val() === newData.val() || root.child('backpack_spark_v4/rooms').child($room).child('members').child('1/uid').val() === newData.val() || root.child('backpack_spark_v4/rooms').child($room).child('members').child('2/uid').val() === newData.val() || root.child('backpack_spark_v4/rooms').child($room).child('members').child('3/uid').val() === newData.val())"
+                    },
+                    "1": {
+                      ".validate": "newData.isString() && (root.child('backpack_spark_v4/rooms').child($room).child('members').child('0/uid').val() === newData.val() || root.child('backpack_spark_v4/rooms').child($room).child('members').child('1/uid').val() === newData.val() || root.child('backpack_spark_v4/rooms').child($room).child('members').child('2/uid').val() === newData.val() || root.child('backpack_spark_v4/rooms').child($room).child('members').child('3/uid').val() === newData.val())"
+                    },
+                    "$extra": {
+                      ".validate": "false"
+                    }
+                  },
+                  "seed": {
+                    ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 4294967295)"
+                  },
+                  "winner": {
+                    ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= -1 && newData.val() <= 1)"
+                  },
+                  "duration": {
+                    ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 9000)"
+                  },
+                  "hp": {
+                    ".validate": "newData.hasChildren(['0','1'])",
+                    "0": {
+                      ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                    },
+                    "1": {
+                      ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                    },
+                    "$extra": {
+                      ".validate": "false"
+                    }
+                  },
+                  "maxHp": {
+                    ".validate": "newData.hasChildren(['0','1'])",
+                    "0": {
+                      ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                    },
+                    "1": {
+                      ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                    },
+                    "$extra": {
+                      ".validate": "false"
+                    }
+                  },
+                  "events": {
+                    ".validate": "newData.hasChildren()",
+                    "$event": {
+                      ".validate": "$event.matches(/^(0|[1-9][0-9]{0,3})$/) && newData.hasChildren(['tick','kind','actor','amount','hp'])",
+                      "tick": {
+                        ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 9000) && newData.val() <= newData.parent().parent().parent().child('duration').val()"
+                      },
+                      "kind": {
+                        ".validate": "(newData.val() === \"attack\" || newData.val() === \"heal\")"
+                      },
+                      "actor": {
+                        ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 1)"
+                      },
+                      "amount": {
+                        ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                      },
+                      "hp": {
+                        ".validate": "newData.hasChildren(['0','1'])",
+                        "0": {
+                          ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                        },
+                        "1": {
+                          ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                        },
+                        "$extra": {
+                          ".validate": "false"
+                        }
+                      },
+                      "crit": {
+                        ".validate": "newData.isBoolean()"
+                      },
+                      "magic": {
+                        ".validate": "newData.isBoolean()"
+                      },
+                      "weapon": {
+                        ".validate": "newData.isString() && newData.val().length <= 64"
+                      },
+                      "selfHeal": {
+                        ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                      },
+                      "thorn": {
+                        ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 100000)"
+                      },
+                      "$extra": {
+                        ".validate": "false"
+                      }
+                    }
+                  },
+                  "$extra": {
+                    ".validate": "false"
+                  }
+                }
+              },
+              "scores": {
+                ".validate": "(!newData.parent().parent().parent().child('members').child('0').exists() || newData.child(newData.parent().parent().parent().child('members').child('0/uid').val()).exists()) && (!newData.parent().parent().parent().child('members').child('1').exists() || newData.child(newData.parent().parent().parent().child('members').child('1/uid').val()).exists()) && (!newData.parent().parent().parent().child('members').child('2').exists() || newData.child(newData.parent().parent().parent().child('members').child('2/uid').val()).exists()) && (!newData.parent().parent().parent().child('members').child('3').exists() || newData.child(newData.parent().parent().parent().child('members').child('3/uid').val()).exists())",
+                "$uid": {
+                  ".validate": "newData.hasChildren([\"points\",\"games\",\"normalized\"]) && (root.child('backpack_spark_v4/rooms').child($room).child('members').child('0/uid').val() === $uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('1/uid').val() === $uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('2/uid').val() === $uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('3/uid').val() === $uid)",
+                  "points": {
+                    ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 2"
+                  },
+                  "games": {
+                    ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 2)"
+                  },
+                  "normalized": {
+                    ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 1"
+                  },
+                  "$extra": {
+                    ".validate": "false"
+                  }
+                }
+              },
+              "$extra": {
+                ".validate": "false"
+              }
+            }
+          },
+          "members": {
+            ".validate": "newData.hasChildren()",
+            "$slot": {
+              ".write": "auth != null && root.child('backpack_spark_v4/rooms').child($room).child('meta').child('expiresAt').val() > now && root.child('backpack_spark_v4/rooms').child($room).child('meta').child('phase').val() === 'preparing' && ((!data.exists() && newData.child('uid').val() === auth.uid && newData.child('ready').val() === false && newData.child('readyRound').val() === 0 && newData.child('ack').val() === 0 && newData.child('left').val() === false) || (data.child('uid').val() === auth.uid && newData.child('uid').val() === auth.uid && (data.child('readyRound').val() !== root.child('backpack_spark_v4/rooms').child($room).child('meta').child('round').val() || newData.child('ready').val() === false || data.child('left').val() === true) && newData.child('ack').val() < root.child('backpack_spark_v4/rooms').child($room).child('meta').child('round').val() && newData.child('left').val() === false) || (!newData.exists() && (data.child('uid').val() === auth.uid || (root.child('backpack_spark_v4/rooms').child($room).child('meta').child('owner').val() === auth.uid && data.child('left').val() === true))))",
+              ".validate": "$slot.matches(/^[0-3]$/) && newData.hasChildren(['uid','name','charKey','joinedAt','ready','readyRound','ack','left']) && ($slot === '0' || !newData.parent().child('0').exists() || newData.parent().child('0/uid').val() !== auth.uid) && ($slot === '1' || !newData.parent().child('1').exists() || newData.parent().child('1/uid').val() !== auth.uid) && ($slot === '2' || !newData.parent().child('2').exists() || newData.parent().child('2/uid').val() !== auth.uid) && ($slot === '3' || !newData.parent().child('3').exists() || newData.parent().child('3/uid').val() !== auth.uid) && (!newData.child('ready').val() || (newData.child('loadout').exists() && newData.child('readyRound').val() === root.child('backpack_spark_v4/rooms').child($room).child('meta').child('round').val() && newData.child('loadout/name').val() === newData.child('name').val() && newData.child('loadout/charKey').val() === newData.child('charKey').val()))",
+              "uid": {
+                ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 128 && (!data.exists() || newData.val() === data.val())"
+              },
+              "name": {
+                ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 24"
+              },
+              "charKey": {
+                ".validate": "(newData.val() === \"knight\" || newData.val() === \"wizard\" || newData.val() === \"rogue\" || newData.val() === \"cleric\" || newData.val() === \"barbarian\" || newData.val() === \"ranger\")"
+              },
+              "joinedAt": {
+                ".validate": "newData.isNumber() && ((!data.exists() && newData.val() <= now + 60000 && newData.val() >= now - 60000) || (data.exists() && newData.val() === data.val()))"
+              },
+              "ready": {
+                ".validate": "newData.isBoolean()"
+              },
+              "readyRound": {
+                ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 1000000)"
+              },
+              "ack": {
+                ".write": "auth != null && data.parent().child('uid').val() === auth.uid && root.child('backpack_spark_v4/rooms').child($room).child('meta').child('expiresAt').val() > now && root.child('backpack_spark_v4/rooms').child($room).child('meta').child('phase').val() === 'result' && data.parent().child('left').val() === false && newData.val() === root.child('backpack_spark_v4/rooms').child($room).child('meta').child('round').val()",
+                ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 0 && newData.val() <= 1000000)"
+              },
+              "left": {
+                ".write": "auth != null && data.parent().child('uid').val() === auth.uid && auth.uid !== root.child('backpack_spark_v4/rooms').child($room).child('meta').child('owner').val() && root.child('backpack_spark_v4/rooms').child($room).child('meta').child('expiresAt').val() > now && (root.child('backpack_spark_v4/rooms').child($room).child('meta').child('phase').val() === 'battle' || root.child('backpack_spark_v4/rooms').child($room).child('meta').child('phase').val() === 'result') && newData.val() === true",
+                ".validate": "newData.isBoolean()"
+              },
+              "loadout": {
+                ".validate": "newData.hasChildren(['name','charKey','baseHp']) && ((newData.child('charKey').val() === \"knight\" && newData.child('baseHp').val() === 120) || (newData.child('charKey').val() === \"wizard\" && newData.child('baseHp').val() === 80) || (newData.child('charKey').val() === \"rogue\" && newData.child('baseHp').val() === 95) || (newData.child('charKey').val() === \"cleric\" && newData.child('baseHp').val() === 100) || (newData.child('charKey').val() === \"barbarian\" && newData.child('baseHp').val() === 140) || (newData.child('charKey').val() === \"ranger\" && newData.child('baseHp').val() === 90))",
+                "name": {
+                  ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 24"
+                },
+                "charKey": {
+                  ".validate": "(newData.val() === \"knight\" || newData.val() === \"wizard\" || newData.val() === \"rogue\" || newData.val() === \"cleric\" || newData.val() === \"barbarian\" || newData.val() === \"ranger\")"
+                },
+                "baseHp": {
+                  ".validate": "(newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 500)"
+                },
+                "backpack": {
+                  ".validate": "newData.hasChildren()",
+                  "$i": {
+                    ".validate": "$i.matches(/^(0|[1-9]|[12][0-9])$/) && newData.hasChildren(['itemKey','x','y','uid']) && newData.child('itemKey').isString() && newData.child('itemKey').val().matches(/^[a-z_]{1,32}$/) && (newData.child('x').isNumber() && newData.child('x').val() % 1 === 0 && newData.child('x').val() >= 0 && newData.child('x').val() <= 5) && (newData.child('y').isNumber() && newData.child('y').val() % 1 === 0 && newData.child('y').val() >= 0 && newData.child('y').val() <= 4) && (newData.child('uid').isNumber() && newData.child('uid').val() % 1 === 0 && newData.child('uid').val() >= 0 && newData.child('uid').val() <= 29) && ('' + newData.child('uid').val()) === $i",
+                    "itemKey": {
+                      ".validate": "newData.isString()"
+                    },
+                    "x": {
+                      ".validate": "newData.isNumber()"
+                    },
+                    "y": {
+                      ".validate": "newData.isNumber()"
+                    },
+                    "uid": {
+                      ".validate": "newData.isNumber()"
+                    },
+                    "$extra": {
+                      ".validate": "false"
+                    }
+                  }
+                },
+                "$extra": {
+                  ".validate": "false"
+                }
+              },
+              "$extra": {
+                ".validate": "false"
+              }
+            }
+          },
+          "$extra": {
+            ".validate": "false"
+          }
+        }
+      },
+      "presence": {
+        "$room": {
+          ".read": "auth != null && (root.child('backpack_spark_v4/rooms').child($room).child('members').child('0/uid').val() === auth.uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('1/uid').val() === auth.uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('2/uid').val() === auth.uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('3/uid').val() === auth.uid)",
+          "$uid": {
+            ".validate": "newData.hasChildren()",
+            "$conn": {
+              ".write": "auth != null && auth.uid === $uid && (!newData.exists() || ((root.child('backpack_spark_v4/rooms').child($room).child('members').child('0/uid').val() === auth.uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('1/uid').val() === auth.uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('2/uid').val() === auth.uid || root.child('backpack_spark_v4/rooms').child($room).child('members').child('3/uid').val() === auth.uid) && root.child('backpack_spark_v4/rooms').child($room).child('meta').child('phase').val() !== 'closed' && root.child('backpack_spark_v4/rooms').child($room).child('meta').child('expiresAt').val() > now))",
+              ".validate": "$conn.matches(/^[a-f0-9]{32}$/) && newData.hasChildren(['online','at'])",
+              "online": {
+                ".validate": "newData.val() === true"
+              },
+              "at": {
+                ".validate": "newData.isNumber() && newData.val() <= now+60000 && newData.val() >= now-60000"
+              },
+              "$extra": {
+                ".validate": "false"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

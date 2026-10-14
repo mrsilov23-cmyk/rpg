@@ -1,0 +1,11 @@
+PASS concurrent fourth/fifth join: exactly4 independent UID members
+PASS ready freeze blocks edits
+PASS host disconnected pauses all-ready; no automatic host migration
+PASS same-UID host reconnect, host/browser replay deterministic, all4 results same
+PASS all-ack cycle and idempotent sandbox income
+PASS 3-player triangle two personal duels normalized scores
+PASS host leave closes room, guests recover offline, no fake migration
+PASS offline training retained
+PASS no page errors; no Firebase/CDN requests in local mock
+PASS CDN failure actionable, offline2.5D training opens at390px
+PASS final V3 embedded item/portrait assets preserved exactly
